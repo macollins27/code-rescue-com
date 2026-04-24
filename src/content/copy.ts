@@ -129,18 +129,21 @@ export const RULE_ANATOMY = {
 
 export const PRICING = {
   kicker: "Price",
-  title: "$10,000 to $100,000. Fixed at kickoff.",
-  sub: "Engagements are scoped to your codebase and the problem. Once we've talked through the surface area and agreed on a number, it stops moving. No hourly billing. No scope creep. No surprise invoices.",
+  title: "Starting at $10,000. Fixed at kickoff.",
+  sub: "Engagements are scoped to your codebase and the problem. The number gets nailed down on the call — once we agree, it stops moving.",
   floor: {
     label: "Floor",
     amount: "$10,000",
     note: "Small codebase, one bounded problem, a QA run or a focused migration.",
   },
-  ceiling: {
-    label: "Ceiling",
-    amount: "$100,000",
-    note: "Large codebase, multi-domain scope, full stack installed with a substantial deliverable shipped under it.",
-  },
+  scopeLabel: "What moves the number",
+  scopeFactors: [
+    "Codebase size and how many domains are in scope",
+    "Which deliverable — a domain build, a system migration, or a QA run",
+    "Depth of existing rules, hooks, and tests already in place",
+    "Whether shared-authority files already exist or need to be authored",
+  ],
+  reassurance: "Fixed at kickoff. No hourly billing. No scope creep. No surprise invoices.",
   alternativesKicker: "The alternatives, honestly",
   alternativesTitle: "What you could do instead — and what each option leaves unsolved.",
   alternativesSub:
@@ -192,7 +195,7 @@ export const ENGAGE = {
   facts: [
     { k: "Operator", v: "Maxwell Collins" },
     { k: "Location", v: "Tampa, FL" },
-    { k: "Price", v: "$10k – $100k · fixed at kickoff" },
+    { k: "Price", v: "From $10k · fixed at kickoff" },
     { k: "Duration", v: "2 – 8 weeks" },
     { k: "Clients at a time", v: "One" },
     { k: "Next slot", v: "Inquire" },

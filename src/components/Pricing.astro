@@ -9,20 +9,21 @@ import { COMPARE } from "@content/compare";
     <h2 class="h2">{PRICING.title}</h2>
     <p class="sub">{PRICING.sub}</p>
 
-    <div class="price-range">
-      <div class="price-range-row">
-        <span class="price-range-label">{PRICING.floor.label}</span>
-        <span class="price-range-amount">{PRICING.floor.amount}</span>
-        <span class="price-range-note">{PRICING.floor.note}</span>
+    <div class="price-card">
+      <div class="price-floor">
+        <span class="price-floor-label">{PRICING.floor.label}</span>
+        <span class="price-floor-amount">{PRICING.floor.amount}</span>
+        <span class="price-floor-note">{PRICING.floor.note}</span>
       </div>
-      <div class="price-range-bar" aria-hidden="true">
-        <div class="price-range-bar-fill"></div>
+
+      <div class="price-scope">
+        <div class="price-scope-label">{PRICING.scopeLabel}</div>
+        <ul class="price-scope-list">
+          {PRICING.scopeFactors.map((f) => <li>{f}</li>)}
+        </ul>
       </div>
-      <div class="price-range-row">
-        <span class="price-range-label">{PRICING.ceiling.label}</span>
-        <span class="price-range-amount">{PRICING.ceiling.amount}</span>
-        <span class="price-range-note">{PRICING.ceiling.note}</span>
-      </div>
+
+      <p class="price-reassurance">{PRICING.reassurance}</p>
     </div>
 
     <div class="alternatives">
@@ -52,52 +53,87 @@ import { COMPARE } from "@content/compare";
 </section>
 
 <style>
-  .price-range {
+  .price-card {
     margin-top: 40px;
     border: 1px solid var(--line-2);
     background: var(--bg-card);
-    padding: 36px 40px;
+    padding: 40px;
   }
-  .price-range-row {
+
+  .price-floor {
     display: grid;
-    grid-template-columns: 120px 220px 1fr;
+    grid-template-columns: 120px auto 1fr;
     gap: 32px;
     align-items: baseline;
-    padding: 8px 0;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
   }
-  .price-range-label {
+  .price-floor-label {
     font-family: var(--mono);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--ink-faint);
   }
-  .price-range-amount {
+  .price-floor-amount {
     font-family: var(--serif);
     font-weight: 600;
-    font-size: clamp(28px, 3.5vw, 40px);
+    font-size: clamp(36px, 4.5vw, 48px);
     letter-spacing: -0.02em;
     color: var(--accent-deep);
     line-height: 1;
   }
-  .price-range-note {
+  .price-floor-note {
     font-family: var(--serif);
     font-size: 16px;
     line-height: 1.55;
     color: var(--ink-2);
   }
-  .price-range-bar {
-    margin: 20px 0 20px 152px;
-    height: 4px;
-    background: var(--line);
-    border-radius: 2px;
-    overflow: hidden;
+
+  .price-scope {
+    padding: 32px 0 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .price-scope-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .price-scope-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .price-scope-list li {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    padding-left: 20px;
     position: relative;
   }
-  .price-range-bar-fill {
+  .price-scope-list li::before {
+    content: "";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, var(--accent-faint), var(--accent));
+    left: 2px;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .price-reassurance {
+    margin: 28px 0 0;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink);
   }
 
   .alternatives {
@@ -144,22 +180,24 @@ import { COMPARE } from "@content/compare";
     line-height: 1.55;
     color: var(--ink-2);
   }
+
   @media (max-width: 900px) {
-    .price-range {
+    .price-card {
       padding: 28px 24px;
     }
-    .price-range-row {
+    .price-floor {
       grid-template-columns: 90px 1fr;
       gap: 8px 20px;
+      padding-bottom: 24px;
     }
-    .price-range-row .price-range-note {
+    .price-floor-note {
       grid-column: 2;
     }
-    .price-range-amount {
-      font-size: 28px;
+    .price-floor-amount {
+      font-size: 32px;
     }
-    .price-range-bar {
-      margin-left: 0;
+    .price-scope {
+      padding: 24px 0 22px;
     }
     .compare-v2-row {
       grid-template-columns: 1fr;
@@ -168,15 +206,23 @@ import { COMPARE } from "@content/compare";
     }
   }
   @media (max-width: 640px) {
-    .price-range {
+    .price-card {
       padding: 24px 20px;
     }
-    .price-range-row {
+    .price-floor {
       grid-template-columns: 1fr;
       gap: 4px;
+      padding-bottom: 22px;
     }
-    .price-range-row .price-range-note {
+    .price-floor-note {
       grid-column: 1;
+    }
+    .price-floor-amount {
+      font-size: 36px;
+      margin: 4px 0;
+    }
+    .price-scope-list li {
+      font-size: 15px;
     }
     .alternatives {
       margin-top: 56px;
