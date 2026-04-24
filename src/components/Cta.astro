@@ -1,0 +1,121 @@
+---
+import { CTA } from "@content/copy";
+---
+
+<section id="engage">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <h3>{CTA.h3}</h3>
+        <p class="sub">{CTA.sub}</p>
+        <div class="buttons">
+          <a class="btn" href={CTA.primary.href}>
+            <span aria-hidden="true">↪</span>
+            {CTA.primary.label}
+          </a>
+          <a class="btn secondary" href={CTA.secondary.href}>{CTA.secondary.label}</a>
+        </div>
+      </div>
+      <div class="cta-info">
+        {
+          CTA.info.map(([k, v, href]) => (
+            <div class="row">
+              <span class="k">{k}</span>
+              <span class="v">
+                {href ? (
+                  <a class="link" href={href}>
+                    {v}
+                  </a>
+                ) : (
+                  v
+                )}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    border: 1px solid var(--rule-strong);
+    padding: 56px 48px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: center;
+    background: var(--panel);
+  }
+  h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .sub {
+    color: var(--ink-dim);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.5;
+    max-width: 42ch;
+    text-wrap: pretty;
+  }
+  .buttons {
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 22px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    border: none;
+    cursor: pointer;
+    transition: filter 120ms;
+  }
+  .btn:hover {
+    filter: brightness(1.08);
+  }
+  .btn.secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule-strong);
+  }
+  .cta-info {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--ink-dim);
+  }
+  .row {
+    display: flex;
+    gap: 16px;
+  }
+  .k {
+    color: var(--ink-faint);
+    width: 96px;
+  }
+  .v {
+    color: var(--ink);
+  }
+  @media (max-width: 900px) {
+    .cta {
+      grid-template-columns: 1fr;
+      padding: 36px 24px;
+    }
+  }
+</style>

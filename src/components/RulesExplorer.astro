@@ -1,0 +1,89 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { RULES_SEC } from "@content/copy";
+import { RULES } from "@content/rules";
+import RulesExplorerInteractive from "./RulesExplorerInteractive.tsx";
+---
+
+<section>
+  <div class="wrap">
+    <SectionHead idx={RULES_SEC.idx} title={RULES_SEC.title} subHtml={RULES_SEC.subHtml} />
+    <RulesExplorerInteractive rules={RULES} client:visible />
+  </div>
+</section>
+
+<style is:global>
+  .rx {
+    border: 1px solid var(--rule);
+    background: var(--panel);
+  }
+  .rx-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .rx-tab {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 18px;
+    color: var(--ink-dim);
+    cursor: pointer;
+    border-right: 1px solid var(--rule);
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .rx-tab:hover {
+    color: var(--ink);
+  }
+  .rx-tab.active {
+    color: var(--accent-ink);
+    background: var(--accent);
+  }
+  .rx-tab .count {
+    font-variant-numeric: tabular-nums;
+    opacity: 0.7;
+  }
+  .rx-list {
+    max-height: 360px;
+    overflow-y: auto;
+  }
+  .rx-item {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 20px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    align-items: baseline;
+  }
+  .rx-item:first-child {
+    border-top: 0;
+  }
+  .rx-item .rid {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .rx-item .txt {
+    color: var(--ink);
+  }
+  .rx-item .layer {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  @media (max-width: 900px) {
+    .rx-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

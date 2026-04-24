@@ -1,0 +1,62 @@
+{
+  "name": "code-rescue-com",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Code-Rescue services page. DRDD installed, one client at a time.",
+  "homepage": "https://code-rescue.com",
+  "author": "Maxwell Collins <max@code-rescue.com>",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "packageManager": "pnpm@10.24.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "gate": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/preact": "^5.1.2",
+    "@astrojs/sitemap": "^3.7.2",
+    "@fontsource-variable/inter": "^5.1.1",
+    "@fontsource-variable/jetbrains-mono": "^5.1.2",
+    "@fontsource-variable/newsreader": "^5.1.2",
+    "astro": "^6.1.9",
+    "preact": "^10.29.1",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint": "^9.19.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "husky": "^9.1.7",
+    "lightningcss": "^1.32.0",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,astro,json,md,css}": "prettier --write"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

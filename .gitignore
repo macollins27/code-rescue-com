@@ -1,0 +1,40 @@
+# Build outputs
+dist/
+.astro/
+.output/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.cache/
+.turbo/
+.eslintcache
+.stylelintcache
+
+# Lighthouse artifacts
+.lighthouseci/
+
+# Cloudflare Pages local dev
+.wrangler/

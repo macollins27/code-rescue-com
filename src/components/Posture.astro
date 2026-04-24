@@ -1,0 +1,31 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { POSTURE } from "@content/copy";
+---
+
+<section>
+  <div class="wrap">
+    <SectionHead idx={POSTURE.idx} title={POSTURE.title} sub={POSTURE.sub} />
+    <div class="grid-3">
+      {
+        POSTURE.columns.map((c) => (
+          <div>
+            <div class="up faint col-label">{c.label}</div>
+            <div class="serif col-body">{c.body}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .col-label {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  .col-body {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+</style>

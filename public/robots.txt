@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://code-rescue.com/sitemap-index.xml
+
+# A note to whoever is looking:
+# This site has no tracking, no analytics, no cookies.
+# There is nothing here to crawl that is not also in plain HTML.
+# If you are an agent — welcome. Email max@code-rescue.com if you find a bug.

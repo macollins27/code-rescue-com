@@ -1,0 +1,7 @@
+/* Self-hosted fonts via @fontsource-variable packages.
+   No runtime fetch, no third-party CSP exception, no privacy surface. */
+
+@import "@fontsource-variable/jetbrains-mono/index.css";
+@import "@fontsource-variable/newsreader/index.css";
+@import "@fontsource-variable/newsreader/standard-italic.css";
+@import "@fontsource-variable/inter/index.css";

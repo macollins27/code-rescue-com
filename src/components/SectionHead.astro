@@ -1,0 +1,18 @@
+---
+interface Props {
+  idx: string;
+  title: string;
+  sub?: string;
+  subHtml?: string;
+}
+
+const { idx, title, sub, subHtml } = Astro.props;
+---
+
+<div class="sec-head">
+  <div class="idx">{idx}</div>
+  <div>
+    <h2>{title}</h2>
+    {subHtml ? <div class="sub" set:html={subHtml} /> : sub ? <div class="sub">{sub}</div> : null}
+  </div>
+</div>

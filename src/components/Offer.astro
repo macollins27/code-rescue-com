@@ -1,0 +1,182 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { OFFER } from "@content/copy";
+import { DELIVERABLES } from "@content/deliverables";
+---
+
+<section id="offer">
+  <div class="wrap">
+    <SectionHead idx={OFFER.idx} title={OFFER.title} sub={OFFER.sub} />
+
+    <div class="offer">
+      <div class="left">
+        <div class="price num">{OFFER.price}</div>
+        <div class="price-label">{OFFER.priceLabel}</div>
+        <div class="block">
+          <div class="up faint block-label">{OFFER.durationLabel}</div>
+          <div class="mono block-value">{OFFER.duration}</div>
+        </div>
+        <div class="block">
+          <div class="up faint block-label">{OFFER.ownershipLabel}</div>
+          <div class="mono dim own">
+            {OFFER.ownershipLine1}<br />
+            {OFFER.ownershipLine2}
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="up faint right-label">{OFFER.installedLabel}</div>
+        <ul class="installed">
+          {
+            OFFER.installed.map((item) => (
+              <li>
+                <span class="accent mono bullet">▸</span>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverables-wrap">
+      <div class="up faint choose-label">{OFFER.chooseLabel}</div>
+      <div class="grid-3">
+        {
+          DELIVERABLES.map((d) => (
+            <div class="deliverable">
+              <div class="tag">{d.tag}</div>
+              <h4>{d.title}</h4>
+              <div class="plain">{d.plain}</div>
+              <div class="tech" set:html={d.techHtml} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .offer {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    border: 1px solid var(--rule-strong);
+    background: var(--panel);
+  }
+  .offer .left {
+    padding: 40px;
+    border-right: 1px solid var(--rule-strong);
+  }
+  .offer .right {
+    padding: 40px;
+    background: var(--panel-2);
+  }
+  .price {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 72px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .price-label {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .block {
+    margin-top: 24px;
+  }
+  .block:first-of-type {
+    margin-top: 32px;
+  }
+  .block-label {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+  .block-value {
+    font-size: 15px;
+  }
+  .own {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .right-label {
+    font-size: 11px;
+    margin-bottom: 18px;
+  }
+  .installed {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .installed li {
+    padding: 8px 0;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+  }
+  .installed li + li {
+    border-top: 1px solid var(--rule);
+  }
+  .deliverables-wrap {
+    margin-top: 48px;
+  }
+  .choose-label {
+    font-size: 11px;
+    margin-bottom: 18px;
+  }
+  .deliverable {
+    border: 1px solid var(--rule);
+    padding: 26px;
+    background: var(--bg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .deliverable .tag {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .deliverable h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .deliverable .plain {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .deliverable .tech {
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    flex: 1;
+  }
+  @media (max-width: 900px) {
+    .offer {
+      grid-template-columns: 1fr;
+    }
+    .offer .left {
+      border-right: 0;
+      border-bottom: 1px solid var(--rule-strong);
+    }
+  }
+</style>

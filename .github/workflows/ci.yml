@@ -1,0 +1,111 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: pnpm gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Lint (max-warnings 0)
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Astro check
+        run: pnpm check
+
+      - name: Build
+        env:
+          PUBLIC_GIT_SHA: ${{ github.sha }}
+          PUBLIC_BUILD_DATE: ${{ github.event.head_commit.timestamp || github.event.pull_request.updated_at }}
+        run: pnpm build
+
+      - name: Bundle size check
+        run: |
+          total=0
+          for f in dist/_astro/*.js; do
+            if [ -f "$f" ]; then
+              size=$(gzip -c "$f" | wc -c)
+              total=$((total + size))
+            fi
+          done
+          echo "Total JS gzipped: $total bytes"
+          if [ "$total" -gt 40960 ]; then
+            echo "::error::JS bundle ${total} bytes gzipped exceeds 40KB budget"
+            exit 1
+          fi
+
+      - name: Upload build artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
+          path: dist/
+          retention-days: 7
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: gate
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          PUBLIC_GIT_SHA: ${{ github.sha }}
+        run: pnpm build
+
+      - name: Install Lighthouse CI
+        run: pnpm add -g @lhci/cli@0.14.x
+
+      - name: Run Lighthouse CI
+        run: lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

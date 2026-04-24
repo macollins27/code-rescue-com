@@ -1,0 +1,59 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { OUTCOME } from "@content/copy";
+---
+
+<section>
+  <div class="wrap">
+    <SectionHead idx={OUTCOME.idx} title={OUTCOME.title} sub={OUTCOME.sub} />
+    <div class="grid-4">
+      {
+        OUTCOME.stats.map((s) => (
+          <div class="stat">
+            <div class="n">{s.n}</div>
+            <div class="l">{s.l}</div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="narrative">
+      {
+        OUTCOME.narrative.map((item) => (
+          <div>
+            <div class="up faint h">{item.h}</div>
+            <div class="serif b">{item.b}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .narrative {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .narrative > div {
+    background: var(--bg);
+    padding: 28px;
+  }
+  .h {
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+  .b {
+    font-size: 16px;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  @media (max-width: 900px) {
+    .narrative {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

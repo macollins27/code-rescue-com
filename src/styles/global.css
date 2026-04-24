@@ -1,0 +1,132 @@
+/* ────────────────────────────────────────────────────────────
+   Global reset + utilities.
+   ──────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+html {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--mono);
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.link {
+  border-bottom: 1px solid var(--rule-strong);
+  transition:
+    color 120ms,
+    border-color 120ms;
+}
+a.link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Layout utilities */
+.wrap {
+  max-width: var(--wrap-max);
+  margin: 0 auto;
+  padding: 0 var(--wrap-pad-desktop);
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    padding: 0 var(--wrap-pad-mobile);
+  }
+}
+
+/* Typography utilities */
+.mono {
+  font-family: var(--mono);
+}
+.serif {
+  font-family: var(--serif);
+  font-feature-settings: "liga", "dlig";
+  text-wrap: pretty;
+}
+.sans {
+  font-family: var(--sans);
+}
+.up {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.dim {
+  color: var(--ink-dim);
+}
+.faint {
+  color: var(--ink-faint);
+}
+.accent {
+  color: var(--accent);
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Path/inline-code style */
+.path {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  color: var(--ink-dim);
+  background: var(--panel-2);
+  padding: 1px 6px;
+  border: 1px solid var(--rule);
+}
+
+/* Shared section shell */
+section {
+  border-top: 1px solid var(--rule);
+  padding: var(--sec-pad-y-active, var(--sec-pad-y-high)) 0;
+}
+
+/* Reduced-motion defaults */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

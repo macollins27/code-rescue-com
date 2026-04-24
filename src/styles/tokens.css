@@ -1,0 +1,80 @@
+/* ────────────────────────────────────────────────────────────
+   Design tokens — pinned values.
+   Do not introduce new colors, font sizes, or spacing units
+   without updating this file first.
+   ──────────────────────────────────────────────────────────── */
+
+:root {
+  /* Font stacks */
+  --mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --serif: "Newsreader Variable", "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Terminal register (default, shipped) */
+  --bg: #0b0c0d;
+  --panel: #111315;
+  --panel-2: #15181b;
+  --ink: #e8e6e1;
+  --ink-dim: #a7a49c;
+  --ink-faint: #686560;
+  --rule: #26282b;
+  --rule-strong: #3a3d41;
+  --accent: #d9ff5c;
+  --accent-ink: #0b0c0d;
+  --ok: #8cd47a;
+  --warn: #e8b86a;
+  --crit: #e87c6a;
+
+  /* Layout */
+  --wrap-max: 1240px;
+  --wrap-pad-desktop: 40px;
+  --wrap-pad-mobile: 24px;
+
+  /* Section padding */
+  --sec-pad-y: 64px;
+  --sec-pad-y-tight: 56px;
+  --sec-pad-y-high: 80px;
+
+  /* Typography body */
+  --body-size: 14px;
+  --body-line: 1.55;
+}
+
+/* Editorial register — dev-only, toggled via ?reg=editorial */
+[data-reg="editorial"] {
+  --bg: #f4f1ea;
+  --panel: #ebe7de;
+  --panel-2: #e2ddd1;
+  --ink: #17181a;
+  --ink-dim: #55524b;
+  --ink-faint: #88847a;
+  --rule: #cec8b8;
+  --rule-strong: #b4ad9a;
+  --accent: #c4410a;
+  --accent-ink: #f4f1ea;
+}
+
+/* Spec register — dev-only, toggled via ?reg=spec */
+[data-reg="spec"] {
+  --bg: #ffffff;
+  --panel: #f6f6f4;
+  --panel-2: #eceae4;
+  --ink: #0a0a0a;
+  --ink-dim: #4a4a48;
+  --ink-faint: #8a8782;
+  --rule: #d8d6d0;
+  --rule-strong: #b0ada4;
+  --accent: #1144cc;
+  --accent-ink: #ffffff;
+}
+
+/* Density modes — toggled via `d` key in craft layer */
+[data-density="tight"] {
+  --sec-pad-y-active: var(--sec-pad-y-tight);
+}
+[data-density="medium"] {
+  --sec-pad-y-active: var(--sec-pad-y);
+}
+[data-density="high"] {
+  --sec-pad-y-active: var(--sec-pad-y-high);
+}

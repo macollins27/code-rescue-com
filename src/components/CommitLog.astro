@@ -1,0 +1,55 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { COMMIT_LOG } from "@content/copy";
+import { COMMITS } from "@content/commits";
+---
+
+<section>
+  <div class="wrap">
+    <SectionHead idx={COMMIT_LOG.idx} title={COMMIT_LOG.title} subHtml={COMMIT_LOG.subHtml} />
+    <div class="commit-log">
+      {
+        COMMITS.map(([h, t, m]) => (
+          <div class="commit">
+            <div class="hash">{h}</div>
+            <div class={`type ${t === "chore" ? "chore" : ""}`}>{t}</div>
+            <div class="msg">{m}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .commit-log {
+    border: 1px solid var(--rule);
+    background: var(--panel);
+  }
+  .commit {
+    display: grid;
+    grid-template-columns: 92px 96px 1fr;
+    gap: 18px;
+    padding: 10px 18px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .commit:first-child {
+    border-top: 0;
+  }
+  .hash {
+    color: var(--ink-faint);
+  }
+  .type {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .type.chore {
+    color: var(--ink-dim);
+  }
+  .msg {
+    color: var(--ink);
+  }
+</style>

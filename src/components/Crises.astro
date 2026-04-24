@@ -1,0 +1,74 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { CRISES_SEC } from "@content/copy";
+import { CRISES } from "@content/crises";
+---
+
+<section id="crises">
+  <div class="wrap">
+    <SectionHead idx={CRISES_SEC.idx} title={CRISES_SEC.title} subHtml={CRISES_SEC.subHtml} />
+    <div>
+      {
+        CRISES.map((c) => (
+          <div class="crisis-row">
+            <div class="n num">{c.n}</div>
+            <div>
+              <div class="name">{c.name}</div>
+              <div class="date">{c.date}</div>
+            </div>
+            <div>
+              <div class="desc">{c.desc}</div>
+              {c.pull ? <div class="callout pull">&ldquo;{c.pull}&rdquo;</div> : null}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .crisis-row {
+    display: grid;
+    grid-template-columns: 64px 200px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .n {
+    font-family: var(--mono);
+    font-size: 28px;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .name {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .date {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 4px;
+  }
+  .desc {
+    font-family: var(--serif);
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink-dim);
+    text-wrap: pretty;
+  }
+  .pull {
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+  @media (max-width: 900px) {
+    .crisis-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

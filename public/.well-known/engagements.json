@@ -1,0 +1,31 @@
+{
+  "$schema": "https://code-rescue.com/schemas/engagements-v1.json",
+  "operator": "Maxwell Collins",
+  "company": "Code-Rescue",
+  "location": "Tampa, FL, USA",
+  "availability": {
+    "posture": "one-at-a-time",
+    "nextSlot": "inquire",
+    "waitlistDepth": "weeks"
+  },
+  "engagement": {
+    "price": { "amount": 40000, "currency": "USD", "shape": "fixed" },
+    "duration": { "min_weeks": 2, "max_weeks": 8 },
+    "deliverables": ["domain-build", "system-migration", "qa-run"],
+    "ownership": "client owns all artifacts, no licensing"
+  },
+  "shape_of_fit": [
+    "codebase in TypeScript / Node / Python / Go",
+    "LLM-assisted development in active use",
+    "existing or impending due-diligence exposure",
+    "a bounded problem that can be closed in one engagement"
+  ],
+  "rejection_criteria": [
+    "greenfield prototype with no production surface",
+    "retainer-only engagement",
+    "staff augmentation",
+    "unbounded research"
+  ],
+  "contact": "max@code-rescue.com",
+  "manifesto": "https://maxwellacollins.com/manifesto"
+}

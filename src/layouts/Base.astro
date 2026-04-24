@@ -1,0 +1,80 @@
+---
+import "@styles/tokens.css";
+import "@styles/fonts.css";
+import "@styles/global.css";
+import "@styles/sections.css";
+import "@styles/craft.css";
+import CraftLayer from "@components/craft/CraftLayer.tsx";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = "Code-Rescue — Install the stack that catches LLM slop before main",
+  description = "A single engagement, fixed $40,000. Install DRDD — ~113 rules, 12-stage gate, 9-pass review, MCP-driven QA — in your codebase. One client at a time.",
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const buildSha = import.meta.env.PUBLIC_GIT_SHA ?? "dev";
+const buildDate = import.meta.env.PUBLIC_BUILD_DATE ?? new Date().toISOString().slice(0, 10);
+---
+
+<!doctype html>
+<html lang="en" data-reg="terminal" data-density="high">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b0c0d" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="build-sha" content={buildSha} />
+    <meta name="build-date" content={buildDate} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Code-Rescue" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Maxwell Collins — Field Notes"
+      href="https://maxwellacollins.com/feed.xml"
+    />
+  </head>
+  <body>
+    <!--
+      ── CODE-RESCUE ──────────────────────────────────────────
+      You opened view-source. Welcome.
+
+      This page is hand-laid. Markup is canonical HTML5 —
+      every non-void element closes explicitly, every attribute
+      is double-quoted, no self-closing on non-void tags.
+
+      There is no tracking, no analytics, no third-party scripts.
+      Fonts are self-hosted. JS is <40 KB gzipped.
+
+      If you find a bug, email max@code-rescue.com.
+
+      Puzzle: which tool enforces rule CON-9 (no UUIDv4) at
+      commit time? First correct email moves up the waitlist
+      by one slot.
+      ─────────────────────────────────────────────────────────
+    -->
+    <slot />
+    <CraftLayer client:idle />
+  </body>
+</html>

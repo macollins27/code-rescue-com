@@ -1,0 +1,42 @@
+---
+import { FOOTER } from "@content/copy";
+---
+
+<footer>
+  <div class="wrap">
+    <div>
+      {FOOTER.left}
+      <a class="link" href={`mailto:${FOOTER.email}`}>{FOOTER.email}</a>
+    </div>
+    <div class="links">
+      {
+        FOOTER.links.map((l, i) => (
+          <>
+            {i > 0 ? <span class="sep"> · </span> : null}
+            <a class="link" href={l.href}>
+              {l.label}
+            </a>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding: 56px 0 80px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-faint);
+    font-size: 12px;
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .sep {
+    color: var(--ink-faint);
+  }
+</style>

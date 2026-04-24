@@ -1,0 +1,17 @@
+/* TEAM */
+Operator: Maxwell Collins
+Contact: max [at] code-rescue.com
+Location: Tampa, FL
+
+/* THANKS */
+To everyone who filed a CRITICAL on a live system at 2am.
+
+/* SITE */
+Language: English
+Standards: HTML5, CSS3, ES2022
+Framework: Astro
+Hosting: Cloudflare Pages
+Fonts: JetBrains Mono, Newsreader, Inter — self-hosted
+Analytics: none
+Tracking: none
+Cookies: none
