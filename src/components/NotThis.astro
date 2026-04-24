@@ -1,0 +1,52 @@
+---
+import { NOT_THIS } from "@content/copy";
+---
+
+<section class="section section-notthis" id="notthis">
+  <div class="wrap narrow">
+    <div class="kicker">{NOT_THIS.kicker}</div>
+    <h2 class="h2">{NOT_THIS.title}</h2>
+
+    <div class="notthis-grid">
+      {
+        NOT_THIS.columns.map((c) => (
+          <div>
+            <div class="notthis-title">{c.title}</div>
+            <div class="notthis-body">{c.body}</div>
+          </div>
+        ))
+      }
+      <div class="notthis-col-wide">
+        <div class="notthis-title">{NOT_THIS.wide.title}</div>
+        <div class="notthis-body" set:html={NOT_THIS.wide.bodyHtml} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .notthis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 64px;
+    margin-top: 48px;
+  }
+  .notthis-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--bg);
+  }
+  .notthis-body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(245, 242, 236, 0.75);
+  }
+  .notthis-col-wide {
+    grid-column: 1 / -1;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245, 242, 236, 0.2);
+  }
+</style>

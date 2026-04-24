@@ -1,52 +1,70 @@
-export type RuleLayer = "spec" | "consistency" | "adversarial";
-
-export interface CaseStudy {
-  num: string;
-  kicker: string;
-  title: string;
-  incident: string;
-  observation: string;
-  mechanism: string;
-  code?: string;
-  resultHtml: string;
-  crises: string[];
-  essay?: string;
-}
-
-export interface Crisis {
-  n: string;
-  name: string;
+export interface Incident {
   date: string;
-  desc: string;
-  pull?: string;
+  headline: string;
+  body: string;
+  takeaway: string;
 }
 
-export type CommitType = "feat(qa)" | "feat(qa-v2)" | "feat(pipeline)" | "feat(cto)" | "chore";
-
-export type Commit = readonly [hash: string, type: CommitType, message: string];
-
-export interface Rule {
-  id: string;
-  txt: string;
-  layer: RuleLayer;
-}
-
-export interface RulesIndex {
-  spec: Rule[];
-  consistency: Rule[];
-  adversarial: Rule[];
-}
-
-export type InventoryRow = readonly [artifact: string, count: string, detail: string];
-
-export interface Pass {
-  n: string;
-  t: string;
-}
+export type DeliverableLetter = "a" | "b" | "c";
 
 export interface Deliverable {
-  tag: string;
+  letter: DeliverableLetter;
+  label: string;
+  oneline: string;
+  plain: string;
+  duration: string;
+  bestFor: string;
+}
+
+export interface CompareRow {
+  label: string;
+  produces: string;
+  gap: string;
+}
+
+export interface InstalledMetric {
+  n: string;
+  what: string;
+  plain: string;
+}
+
+export interface PipelineStage {
+  stage: string;
   title: string;
   plain: string;
-  techHtml: string;
+}
+
+export interface Contact {
+  bookingUrl: string;
+  phone: string;
+  phoneHref: string;
+  email: string;
+  emailHref: string;
+}
+
+export interface RuleAnatomyRowTextPart {
+  kind: "text";
+  value: string;
+}
+export interface RuleAnatomyRowCodePart {
+  kind: "code";
+  value: string;
+}
+export type RuleAnatomyRowPart = RuleAnatomyRowTextPart | RuleAnatomyRowCodePart;
+
+export interface RuleAnatomyRow {
+  k: string;
+  parts: RuleAnatomyRowPart[];
+}
+
+export interface Channel {
+  k: string;
+  v: string;
+  href: string;
+  primary?: boolean;
+}
+
+export interface EngageFact {
+  k: string;
+  v: string;
 }

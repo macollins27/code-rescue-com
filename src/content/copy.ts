@@ -1,224 +1,248 @@
-/* All prose copy for the page. No string literals in components — import from here. */
+import type { Channel, EngageFact, RuleAnatomyRow } from "./types";
+import { CONTACT } from "./contact";
+
+export const META = {
+  title: "Code-Rescue — Install the stack that catches AI mistakes before they ship",
+  description:
+    "One engagement. Price fixed at kickoff. Install the mechanical stack that catches AI-written mistakes before they reach your main branch. One client at a time.",
+} as const;
 
 export const HERO = {
-  eyebrow: "Code-Rescue · Services · One client at a time",
-  headlineHtml:
-    "The LLM shipped slop. Install the stack that catches it <em>before</em> it lands on main.",
-  lede: "A single engagement. A fixed $40,000. DRDD — Domain-Rules-Driven Development — installed in your codebase, tuned to your stack, with one substantial deliverable shipped under the pipeline it enforces. You own every piece. No licensing, no retainers.",
-  thesisLabel: "Canonical thesis",
-  thesisQuote:
-    "If you can't write an assertion for a specification, you don't have a specification yet.",
-  thesisSourceName: "Maxwell Collins",
-  thesisSourceHref: "https://maxwellacollins.com/about",
-  thesisSourceLabel: "maxwellacollins.com/about",
+  eyebrow: "One engagement · Price fixed at kickoff · One client at a time",
+  titleLine1: "Your team is shipping AI-written code.",
+  titleLine2: "Something needs to be catching it.",
+  lede: 'Most of what\'s sold as "AI governance" is advice. Code-Rescue is installation — a mechanical stack of rules, gates, and reviews, wired into your codebase, catching silent mistakes before they reach your main branch. One engagement. Price fixed at kickoff. You own everything.',
+  ctaPrimary: { label: "Book a call", href: CONTACT.bookingUrl },
+  ctaSecondary: { label: "See how it works", href: "#how" },
+  meta: [
+    { k: "Operator", v: "Maxwell Collins" },
+    { k: "Based on", v: "A live production rebuild, documented publicly" },
+    { k: "Availability", v: "Waitlist · weeks, not days" },
+  ],
 } as const;
 
-export const POSTURE = {
-  idx: "§ 00 · Posture",
-  title: "This is not AI consulting.",
-  sub: 'The market is saturated with "AI transformation" and "AI-assisted development" pitches. The buyer on this page has trained themselves to ignore that category. What ships below is working infrastructure — commits, hooks, rules, gates, test suites — iterated across dozens of multi-hour sessions on a real production rebuild. Every rule traces to a specific observed failure documented in public.',
+export const PROBLEM = {
+  kicker: "The problem",
+  title: "AI writes code faster than any human can review it.",
+  paragraphs: [
+    "Your team is shipping more code than ever. Most of it written — or heavily assisted — by an AI agent. The code compiles. The tests pass. Pull requests look clean. And yet bugs are reaching production that your senior engineers would have caught a year ago.",
+    "It's not that the AI is bad at writing code. It's that *nothing in your review pipeline was designed to catch the specific mistakes AI agents make.* Code review assumes a human author who knows what they don't know. Tests assume someone wrote them to assert the thing that actually matters. Neither assumption survives contact with an autonomous agent that's very good at producing convincing partial work.",
+    "The result is a codebase that's drifting from what you thought you were building — silently, one well-intentioned commit at a time.",
+  ],
+  pullquote:
+    '"You can specify software in a form an AI agent cannot silently overrule — as long as the form is mechanical enough to check against the source code at every commit."',
+  pullquoteCite: "Maxwell Collins, DRDD Manifesto · maxwellacollins.com",
+} as const;
+
+export const WHAT_IT_IS = {
+  kicker: "What gets installed",
+  title: "A mechanical stack that catches what human review misses.",
+  sub: "Every AI-written commit, every code change, every migration walks through this before it can land. Nothing is optional. Nothing can be overridden.",
+  closingPara:
+    "Underneath these four numbers is a specific stack: 42 domain rule files, ~3,500 mechanical rule statements across 24 domains, 48 write-time hooks, 41 structural code patterns, 26 lifecycle checks, 20 custom skills, 5 review agents, 7 shared authority files. Every piece is documented, every piece is yours, and every piece is tuned to the shape of your product.",
+  closingMuted:
+    "If the stack reads dense — good, it should. The point is that it's all there, installed, working, on day one.",
+} as const;
+
+export const HOW_IT_WORKS = {
+  kicker: "How it works",
+  title: "Six stages. Every change walks through all of them.",
+  sub: "This is the pipeline that runs on every commit during the engagement, and keeps running after I leave.",
+} as const;
+
+export const DELIVERABLES_SEC = {
+  kicker: "What you choose",
+  title: "One engagement, one concrete deliverable.",
+  sub: "The stack gets installed either way. At kickoff you pick one of three deliverables to ship under it.",
+} as const;
+
+export const PROOF = {
+  kicker: "Receipts",
+  title: "Four dated incidents from one production rebuild.",
+  sub: "Each incident produced a new layer of the stack you'd be installing. None of this is theoretical.",
+  footnote: "The full methodology, with every rule and every incident, is published at ",
+  footnoteLinkText: "maxwellacollins.com",
+  footnoteLinkHref: "https://maxwellacollins.com",
+  footnoteTail: ". This page is the commercial installation of it.",
+} as const;
+
+export const RULE_ANATOMY = {
+  kicker: "What one rule looks like",
+  title: "A small, concrete example.",
+  sub: 'If you\'re wondering what "a mechanical rule" actually is, here is one from the live rebuild — rendered the way it lives in the codebase. It exists because an attack vector was found, and it prevents that exact class of problem from ever shipping again.',
+  id: "AUTH-5",
+  type: "Adversarial",
+  locked: "Locked 2026-04-07",
+  ruleTitle: "Cross-organization access",
+  rows: [
+    {
+      k: "Origin",
+      parts: [
+        {
+          kind: "text",
+          value:
+            "An attacker probing the system could tell whether a record existed in another customer's account by the error code returned — enabling cross-customer enumeration.",
+        },
+      ],
+    },
+    {
+      k: "What the rule says",
+      parts: [
+        {
+          kind: "text",
+          value:
+            'Every request that looks up a single record must include the active organization\'s ID. If no row comes back — regardless of *why* — respond with "not found." Never use "access denied." That error leaks existence.',
+        },
+      ],
+    },
+    {
+      k: "How it's enforced",
+      parts: [
+        {
+          kind: "text",
+          value: "Write-time: an AI agent trying to write ",
+        },
+        { kind: "code", value: '"Access denied"' },
+        {
+          kind: "text",
+          value:
+            " in a procedure file gets blocked before the edit lands. Commit-time: a static check refuses any database query missing the organization ID. Runtime: middleware verifies the session before any procedure body runs.",
+        },
+      ],
+    },
+    {
+      k: "What it closes",
+      parts: [
+        {
+          kind: "text",
+          value:
+            "Three distinct failure modes — record doesn't exist, record was deleted, record belongs to another customer — now return identical responses. A probing client can no longer distinguish between them. The enumeration attack stops being possible.",
+        },
+      ],
+    },
+  ] as RuleAnatomyRow[],
+  footerText:
+    "One of ~3,500 mechanical rule statements across 24 domains. Every one has the same six-part anatomy. ",
+  footerLinkText: "View on maxwellacollins.com →",
+  footerLinkHref: "https://maxwellacollins.com/rules/auth-5",
+} as const;
+
+export const PRICING = {
+  kicker: "Price",
+  title: "$10,000 to $100,000. Fixed at kickoff.",
+  sub: "Engagements are scoped to your codebase and the problem. Once we've talked through the surface area and agreed on a number, it stops moving. No hourly billing. No scope creep. No surprise invoices.",
+  floor: {
+    label: "Floor",
+    amount: "$10,000",
+    note: "Small codebase, one bounded problem, a QA run or a focused migration.",
+  },
+  ceiling: {
+    label: "Ceiling",
+    amount: "$100,000",
+    note: "Large codebase, multi-domain scope, full stack installed with a substantial deliverable shipped under it.",
+  },
+  alternativesKicker: "The alternatives, honestly",
+  alternativesTitle: "What you could do instead — and what each option leaves unsolved.",
+  alternativesSub:
+    "The stack Code-Rescue installs was built over months of production work and documented publicly at maxwellacollins.com. It isn't available as a product, a platform, or an off-the-shelf framework. Here's what the other paths produce, and the gap each one leaves.",
+} as const;
+
+export const NOT_THIS = {
+  kicker: "What this is not",
+  title: "The list of things Code-Rescue deliberately isn't.",
   columns: [
     {
-      label: "What it is",
-      body: "Installed enforcement infrastructure plus one substantial shipped deliverable. You choose the deliverable at kickoff.",
+      title: "Not AI consulting.",
+      body: 'No slides. No workshops. No "AI enablement strategy." If the engagement produces a slide deck, the engagement has failed.',
     },
     {
-      label: "What it isn't",
-      body: 'Staff augmentation. Fractional CTO. Training. Workshops. Slide decks. Code-by-the-hour. Generic "AI consulting."',
+      title: "Not staff augmentation.",
+      body: "I'm not a fractional engineer or a fractional CTO. I install a system, ship one deliverable under it, and leave. Your team runs it after.",
     },
     {
-      label: "Credibility wall",
-      body: "A published manifesto, dated incident essays, a browseable rules explorer, a live commit log. Every claim on this page ties to an artifact or a number.",
+      title: "Not a retainer.",
+      body: "One engagement, price fixed at kickoff, clean exit. If you want ongoing help later, we talk later. Nothing about this engagement locks you in.",
+    },
+    {
+      title: "Not a tool you license.",
+      body: "Every rule, hook, gate, and test installed during the engagement is yours. Modify it, extend it, delete it, fork it. No ongoing fees.",
     },
   ],
-} as const;
-
-export const OFFER = {
-  idx: "§ 01 · Offer",
-  title: "One engagement. Fixed scope. Fixed price.",
-  sub: "The full DRDD stack installed in your codebase, configured to your domain, plus one substantial deliverable shipped under the pipeline it enforces.",
-  price: "$40,000",
-  priceLabel: "Fixed price · single engagement · one client at a time",
-  durationLabel: "Typical duration",
-  duration: "4–8 weeks for deliverable (a) or (b) · 2–3 weeks for (c)",
-  ownershipLabel: "You own everything",
-  ownershipLine1: "No licensing · No ongoing fees · No lock-in",
-  ownershipLine2: "Modify, extend, delete, or fork any piece of it.",
-  installedLabel: "Installed in every engagement",
-  installed: [
-    "12-stage quality gate (pnpm gate / gate:static) tuned to your stack",
-    "~24 runtime hooks + 48 hookify rules + 41 ast-grep structural rules",
-    "Domain-rules authorship system: per-domain .md spec files, source-first pipeline",
-    "Feature-level pipeline with per-layer fan-out and multi-agent review panel",
-    "LLM-driven QA harness with stdio MCP emission + triple-verdict verification",
-    "Persistent cross-session memory system auto-loaded into every session",
-    "9-pass adversarial review skill with mechanical phase gate",
-    "Six GitHub Actions workflows (ci, compliance, deploy, migration-check, qa, security)",
-  ],
-  chooseLabel: "Choose one deliverable at kickoff",
-} as const;
-
-export const OUTCOME = {
-  idx: "§ 02 · After the engagement",
-  title: "What is true of your codebase that wasn't before.",
-  sub: "A junior engineer, internal or AI, reads the spec to learn what the system does. Source code has zero authority against the rules. Phase completion is a file on disk with a validity flag, a source hash, and a clean count — not a prose claim in a PR description.",
-  stats: [
-    { n: "~113", l: "Mechanical rules guarding every AI-authored commit" },
-    { n: "12", l: "Gate stages between commit and the primary branch" },
-    { n: "9", l: "Adversarial review passes ending in a mechanical phase marker" },
-    { n: "5", l: "Enforcement layers — write-time, gate-time, runtime, lifecycle, session" },
-  ],
-  narrative: [
-    {
-      h: "Defect classes made mechanically impossible or mechanically caught",
-      b: "Fake tests. Silent spec drift. Orchestrator lies. IDOR from forgotten org-scoping. Probabilistic flake-demotion. CSP-blocked emission. Attention-exhaustion compression. Rogue subagents racing shared state. Each one traces to a dated incident in the commit log.",
-    },
-    {
-      h: "Due-diligence exposure drops meaningfully",
-      b: "Classes previously surfaced in acquirer code review, SOC 2, or enterprise security review — hardcoded secrets, unsafe cryptography, missing audit-log entries, org-scoping bypasses, tests not exercising production code, framework-version drift — are blocked at commit time.",
-    },
-    {
-      h: "Every procedure has a written specification",
-      b: "Inputs, outputs, error codes, audit behavior, permissions, adversarial contract. A future engineer reads the rules, not the code, to learn what the system must do.",
-    },
-    {
-      h: "Knowledge transfer by co-presence",
-      b: "Your team watches the stack install, the rules authored, the pipeline run, the deliverable ship. DRDD becomes a live reference in your own codebase, not an abstract methodology.",
-    },
-  ],
-} as const;
-
-export const CRISES_SEC = {
-  idx: "§ 03 · Three crises",
-  title: "The classes of failure this stack was built to catch.",
-  subHtml:
-    "Three named, dated incidents. Each one shares the same root, published on the existing site: <em>prose specifications are easier to satisfy than machine-testable ones.</em> Every crisis maps to one or more case studies below.",
-} as const;
-
-export const CASES_SEC = {
-  idx: "§ 04 · Case studies",
-  title: "Seven engineering problems, encountered in private, closed with mechanism.",
-  sub: "Each one describes the incident, the root-cause observation, the mechanism installed to close the failure class, and the measured result. All claims are grounded in committed work in a production monorepo.",
-} as const;
-
-export const NINE_PASS = {
-  idx: "§ 05 · 9-pass review",
-  title: "Phase completion is a file on disk, not a claim in a PR.",
-  subHtml:
-    'Nine sequential passes walk the domain source. A Stop hook blocks phase completion unless <span class="path">reviewer-state.json</span> shows <span class="path">validity: valid</span>, <span class="path">clean: true</span>, and <span class="path">sourceHash</span> matching HEAD. Click a pass to see its scope.',
-} as const;
-
-export const RULES_SEC = {
-  idx: "§ 06 · Rules",
-  title: "~3,500 rule statements across 24 domains. A sample.",
-  subHtml:
-    'The full rule set lives at <a class="link" href="https://maxwellacollins.com/rules">maxwellacollins.com/rules</a>. Rules are monotonic — they strengthen or multiply but never delete. Below: a filtered view of the three layers every domain is classified into.',
-} as const;
-
-export const COMPARE = {
-  idx: "§ 07 · The comparison",
-  title: "$40,000 vs. three months of a senior engineer.",
-  sub: "A CTO comparing options is comparing a transplant against a hire. Salary math: $40k is roughly three months of a senior at US rates, or four of a mid-level.",
-  hire: {
-    label: "Hiring the engineer",
-    bullets: [
-      "Weeks 1–3 onboarding. Weeks 4–8 building infrastructure they'll learn is wrong on contact with reality.",
-      "Month three: reaches your actual product problem. Enforcement infrastructure still not production-hardened.",
-      "Has not seen a test suite pass with 4,800 tautologies, a probabilistic healer demote a real CRITICAL, or 72 concurrent subagents race shared storage-state. Learns these in your production.",
-      "Permanent operational cost. Salary, benefits, management overhead.",
-    ],
-  },
-  engagement: {
-    label: "The engagement",
-    bullets: [
-      "Week one: the iterated, production-hardened stack installs in your codebase. Rules tuned to your stack. Gate green.",
-      "Proof-of-value deliverable (a/b/c) ships during the same window — not in month three.",
-      "Encodes failure history a new hire does not have. Every rule traces to a specific observed incident with a date.",
-      "Fixed payment for installed infrastructure you own outright. No licensing, no retainer, no lock-in.",
-    ],
+  wide: {
+    title: "Not a product you can buy elsewhere.",
+    bodyHtml:
+      'The stack is built from a live production rebuild, documented publicly at <a class="ilink-dark" href="https://maxwellacollins.com">maxwellacollins.com</a>, and installed during the engagement. Nothing about it is licensed, franchised, or sitting on a vendor\'s shelf.',
   },
 } as const;
 
-export const INVENTORY_SEC = {
-  idx: "§ 08 · Inventory",
-  title: "The underlying system, by count.",
-  sub: "Raw counts and artifact names for the buyer who wants to know what's installing. Stack-neutral: hooks are shell, hookify rules are regex, ast-grep rules are language-configurable, the domain-rules system is plain Markdown, the gate is composable per language, the QA harness uses Playwright and MCP.",
-  gateCommand: `$ pnpm gate
-  → format           OK
-  → lint             OK  (--max-warnings 0)
-  → dep-cruiser      OK
-  → ast-grep         OK  (41 rules)
-  → knip             OK
-  → jscpd            OK
-  → syncpack         OK
-  → npm audit        OK
-  → typecheck        OK
-  → unit             OK
-  → integration      OK
-  → e2e              OK
-GATE: PASSED`,
-  denies: `# Denied at the .claude/settings.json layer
-git stash
-git worktree
-git rebase
-git restore
-git push --force
-git clean -f*
-git filter-branch
-edits to .env
-
-# Also denied
---no-verify
-feature branches (all commits land on main)`,
-} as const;
-
-export const COMMIT_LOG = {
-  idx: "§ 09 · Evidence",
-  title: "Recent commits on the primary branch.",
-  subHtml:
-    'Most recent first. Every commit passes <span class="path">pnpm gate:static</span> before push. No feature branches, no <span class="path">--no-verify</span>, no force-push, no <span class="path">git stash</span>. The entire history of the stack is legible at the repo.',
-} as const;
-
-export const UNSOLVED = {
-  idx: "§ 10 · What isn't solved",
-  title: "The operator publishes what he has not figured out.",
-  subHtml:
-    'Asymmetric signal. From the <a class="link" href="https://maxwellacollins.com/now">/now</a> page:',
-  callout:
-    '"I have no answer yet" — on making frontend implementation reliable enough that one agent can take a wireframe and a set of tRPC endpoints and produce a production-grade React page without extensive human review cycles.',
-  follow:
-    "Documented publicly. The services page does not promise a frontend-agent breakthrough; it promises the backend and QA rigor that has been proven. When the frontend problem is closed, it will be closed in public.",
-} as const;
-
-export const CTA = {
-  h3: "One client at a time. New engagements are scheduled into availability.",
-  sub: "Expect a waitlist-style kickoff — weeks, not days. A short intake email describing your stack, team size, and the class of problem you want the engagement to close is enough to start.",
-  primary: {
-    label: "max@code-rescue.com",
-    href: "mailto:max@code-rescue.com?subject=Code-Rescue%20engagement%20inquiry",
-  },
-  secondary: {
-    label: "Read the manifesto",
-    href: "https://maxwellacollins.com/manifesto",
-  },
-  info: [
-    ["OPERATOR", "Maxwell Collins"],
-    ["COMPANY", "Code-Rescue"],
-    ["LOCATION", "Tampa, FL"],
-    ["SITE", "maxwellacollins.com", "https://maxwellacollins.com"],
-    ["PRICE", "$40,000 · fixed"],
-    ["DURATION", "2–8 weeks"],
-    ["CLIENTS", "One at a time"],
-  ] as ReadonlyArray<readonly [string, string, string?]>,
+export const ENGAGE = {
+  kicker: "Engage",
+  title: "One client at a time. Three ways to reach me.",
+  sub: "Pick the channel that fits. The call is structured — 30 minutes, we talk about your codebase and whether this is a fit. The phone is for the immediate question. Email is for the considered note.",
+  channels: [
+    {
+      k: "Book a call",
+      v: "Pick a time in the next 3 days",
+      href: CONTACT.bookingUrl,
+      primary: true,
+    },
+    { k: "Phone", v: CONTACT.phone, href: CONTACT.phoneHref },
+    { k: "Email", v: CONTACT.email, href: CONTACT.emailHref },
+  ] as Channel[],
+  facts: [
+    { k: "Operator", v: "Maxwell Collins" },
+    { k: "Location", v: "Tampa, FL" },
+    { k: "Price", v: "$10k – $100k · fixed at kickoff" },
+    { k: "Duration", v: "2 – 8 weeks" },
+    { k: "Clients at a time", v: "One" },
+    { k: "Next slot", v: "Inquire" },
+  ] as EngageFact[],
 } as const;
 
 export const FOOTER = {
-  left: "Code-Rescue · Maxwell Collins · Tampa, FL · ",
-  email: "max@code-rescue.com",
-  links: [
-    { label: "Manifesto", href: "https://maxwellacollins.com/manifesto" },
-    { label: "Crises", href: "https://maxwellacollins.com/crises" },
-    { label: "Rules", href: "https://maxwellacollins.com/rules" },
-    { label: "Essays", href: "https://maxwellacollins.com/writing" },
+  tagline:
+    "The commercial installation of Domain-Rules-Driven Development — the methodology by Maxwell Collins, documented publicly at ",
+  taglineLinkText: "maxwellacollins.com",
+  taglineLinkHref: "https://maxwellacollins.com",
+  taglineTail: ".",
+  cols: [
+    {
+      h: "Methodology",
+      items: [
+        { label: "Manifesto", href: "https://maxwellacollins.com/manifesto" },
+        { label: "Three crises", href: "https://maxwellacollins.com/crises" },
+        { label: "Rules explorer", href: "https://maxwellacollins.com/rules" },
+        { label: "Field notes", href: "https://maxwellacollins.com/writing" },
+      ],
+    },
+    {
+      h: "Code-Rescue",
+      items: [
+        { label: "What it is", href: "#what" },
+        { label: "How it works", href: "#how" },
+        { label: "Proof", href: "#proof" },
+        { label: "Engage", href: "#engage" },
+      ],
+    },
+    {
+      h: "Contact",
+      items: [
+        { label: "Book a call", href: CONTACT.bookingUrl },
+        { label: CONTACT.phone, href: CONTACT.phoneHref },
+        { label: CONTACT.email, href: CONTACT.emailHref },
+      ],
+    },
   ],
+  contactPlain: "Tampa, FL",
+  bottomLeft: "© 2026 Code-Rescue · Maxwell Collins · Published in public",
+  bottomRight: "No analytics · No tracking · No cookies · View-source has a note",
+} as const;
+
+export const TOPNAV = {
+  links: [
+    { label: "What", href: "#what" },
+    { label: "How", href: "#how" },
+    { label: "Proof", href: "#proof" },
+  ],
+  cta: { label: "Book a call", href: CONTACT.bookingUrl },
 } as const;

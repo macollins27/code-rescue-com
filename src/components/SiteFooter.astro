@@ -2,41 +2,160 @@
 import { FOOTER } from "@content/copy";
 ---
 
-<footer>
+<footer class="site-footer">
   <div class="wrap">
-    <div>
-      {FOOTER.left}
-      <a class="link" href={`mailto:${FOOTER.email}`}>{FOOTER.email}</a>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="brand" aria-label="Code-Rescue home">
+          <span class="brand-mark">CR</span>
+          <span class="brand-name">Code-Rescue</span>
+        </a>
+        <p class="footer-tagline">
+          {FOOTER.tagline}
+          <a class="ilink" href={FOOTER.taglineLinkHref}>{FOOTER.taglineLinkText}</a>
+          {FOOTER.taglineTail}
+        </p>
+      </div>
+      <div class="footer-cols">
+        {
+          FOOTER.cols.map((col) => (
+            <div>
+              <div class="footer-h">{col.h}</div>
+              {col.items.map((i) => (
+                <a href={i.href}>{i.label}</a>
+              ))}
+              {col.h === "Contact" ? (
+                <>
+                  <span class="footer-plain">{FOOTER.contactPlain}</span>
+                  <span class="footer-plain mono clock" id="cr-clock">
+                    &nbsp;
+                  </span>
+                </>
+              ) : null}
+            </div>
+          ))
+        }
+      </div>
     </div>
-    <div class="links">
-      {
-        FOOTER.links.map((l, i) => (
-          <>
-            {i > 0 ? <span class="sep"> · </span> : null}
-            <a class="link" href={l.href}>
-              {l.label}
-            </a>
-          </>
-        ))
-      }
+    <div class="footer-bot">
+      <span class="muted">{FOOTER.bottomLeft}</span>
+      <span class="muted">{FOOTER.bottomRight}</span>
     </div>
   </div>
 </footer>
 
+<script is:inline>
+  (function () {
+    var el = document.getElementById("cr-clock");
+    if (!el) return;
+    var tz;
+    try {
+      tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch {
+      tz = "UTC";
+    }
+    function pad(n) {
+      return n < 10 ? "0" + n : "" + n;
+    }
+    function tick() {
+      var d = new Date();
+      el.textContent = pad(d.getHours()) + ":" + pad(d.getMinutes()) + " · " + tz;
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+</script>
+
 <style>
-  footer {
-    padding: 56px 0 80px;
-    border-top: 1px solid var(--rule);
-    color: var(--ink-faint);
-    font-size: 12px;
+  .site-footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 72px 0 32px;
   }
-  footer .wrap {
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(245, 242, 236, 0.15);
+  }
+  .footer-brand .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .footer-brand .brand-name {
+    color: var(--bg);
+  }
+  .footer-brand .brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .footer-tagline {
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(245, 242, 236, 0.7);
+    margin: 0;
+    max-width: 380px;
+  }
+  .footer-tagline .ilink {
+    color: var(--bg);
+    border-bottom-color: rgba(245, 242, 236, 0.4);
+  }
+  .footer-tagline .ilink:hover {
+    border-bottom-color: var(--bg);
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .footer-cols > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-h {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(245, 242, 236, 0.5);
+    margin-bottom: 4px;
+  }
+  .footer-cols a,
+  .footer-plain {
+    font-size: 14px;
+    color: rgba(245, 242, 236, 0.85);
+  }
+  .footer-cols a:hover {
+    color: var(--accent);
+  }
+  .clock {
+    font-size: 13px;
+  }
+  .footer-bot {
+    padding-top: 24px;
     display: flex;
     justify-content: space-between;
+    gap: 16px;
     flex-wrap: wrap;
-    gap: 20px;
+    font-size: 13px;
   }
-  .sep {
-    color: var(--ink-faint);
+  .footer-bot .muted {
+    color: rgba(245, 242, 236, 0.5);
   }
 </style>

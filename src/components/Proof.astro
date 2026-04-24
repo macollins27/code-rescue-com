@@ -1,0 +1,104 @@
+---
+import { PROOF } from "@content/copy";
+import { INCIDENTS } from "@content/incidents";
+---
+
+<section class="section" id="proof">
+  <div class="wrap narrow">
+    <div class="kicker">{PROOF.kicker}</div>
+    <h2 class="h2">{PROOF.title}</h2>
+    <p class="sub">{PROOF.sub}</p>
+    <div class="incidents">
+      {
+        INCIDENTS.map((i) => (
+          <article class="incident">
+            <div class="incident-date mono">{i.date}</div>
+            <h3 class="incident-headline">{i.headline}</h3>
+            <p class="incident-body">{i.body}</p>
+            <div class="incident-takeaway">
+              <span class="takeaway-k">Takeaway</span>
+              <span class="takeaway-v">{i.takeaway}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <p class="proof-footnote muted">
+      {PROOF.footnote}
+      <a class="ilink" href={PROOF.footnoteLinkHref}>{PROOF.footnoteLinkText}</a>
+      {PROOF.footnoteTail}
+    </p>
+  </div>
+</section>
+
+<style>
+  .incidents {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .incident {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .incident:first-child {
+    padding-top: 0;
+  }
+  .incident:last-child {
+    border-bottom: none;
+  }
+  .incident-date {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .incident-headline {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    text-wrap: pretty;
+  }
+  .incident-body {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0 0 24px;
+    text-wrap: pretty;
+  }
+  .incident-takeaway {
+    padding: 16px 20px;
+    background: var(--bg-warm);
+    border-left: 2px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .takeaway-k {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+  .takeaway-v {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .proof-footnote {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+  }
+</style>

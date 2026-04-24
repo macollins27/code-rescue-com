@@ -1,80 +1,41 @@
 /* ────────────────────────────────────────────────────────────
-   Design tokens — pinned values.
-   Do not introduce new colors, font sizes, or spacing units
-   without updating this file first.
+   Design tokens. Lifted from design/handoff/design-tokens.md.
+   Warm cream + forest green. No dark mode; palette is single-voice.
    ──────────────────────────────────────────────────────────── */
 
 :root {
-  /* Font stacks */
-  --mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --serif: "Newsreader Variable", "Newsreader", Georgia, "Times New Roman", serif;
-  --sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Neutrals — warm cream palette */
+  --bg: #f5f2ec;
+  --bg-warm: #ede8dc;
+  --bg-card: #ffffff;
 
-  /* Terminal register (default, shipped) */
-  --bg: #0b0c0d;
-  --panel: #111315;
-  --panel-2: #15181b;
-  --ink: #e8e6e1;
-  --ink-dim: #a7a49c;
-  --ink-faint: #686560;
-  --rule: #26282b;
-  --rule-strong: #3a3d41;
-  --accent: #d9ff5c;
-  --accent-ink: #0b0c0d;
-  --ok: #8cd47a;
-  --warn: #e8b86a;
-  --crit: #e87c6a;
+  /* Ink — text */
+  --ink: #1a1a1a;
+  --ink-2: #2e2e2e;
+  --ink-dim: #5a5a54;
+  --ink-faint: #8a877e;
+
+  /* Lines */
+  --line: #d9d4c6;
+  --line-2: #c8c2b2;
+
+  /* Accent — forest green */
+  --accent: #2a5f4f;
+  --accent-deep: #1c443a;
+  --accent-ink: #f5f2ec;
+  --accent-faint: #dfe8e3;
+
+  /* Supporting */
+  --warn: #a25f1f;
+
+  /* Font stacks */
+  --serif: "Newsreader Variable", "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:
+    "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono:
+    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   /* Layout */
-  --wrap-max: 1240px;
-  --wrap-pad-desktop: 40px;
-  --wrap-pad-mobile: 24px;
-
-  /* Section padding */
-  --sec-pad-y: 64px;
-  --sec-pad-y-tight: 56px;
-  --sec-pad-y-high: 80px;
-
-  /* Typography body */
-  --body-size: 14px;
-  --body-line: 1.55;
-}
-
-/* Editorial register — dev-only, toggled via ?reg=editorial */
-[data-reg="editorial"] {
-  --bg: #f4f1ea;
-  --panel: #ebe7de;
-  --panel-2: #e2ddd1;
-  --ink: #17181a;
-  --ink-dim: #55524b;
-  --ink-faint: #88847a;
-  --rule: #cec8b8;
-  --rule-strong: #b4ad9a;
-  --accent: #c4410a;
-  --accent-ink: #f4f1ea;
-}
-
-/* Spec register — dev-only, toggled via ?reg=spec */
-[data-reg="spec"] {
-  --bg: #ffffff;
-  --panel: #f6f6f4;
-  --panel-2: #eceae4;
-  --ink: #0a0a0a;
-  --ink-dim: #4a4a48;
-  --ink-faint: #8a8782;
-  --rule: #d8d6d0;
-  --rule-strong: #b0ada4;
-  --accent: #1144cc;
-  --accent-ink: #ffffff;
-}
-
-/* Density modes — toggled via `d` key in craft layer */
-[data-density="tight"] {
-  --sec-pad-y-active: var(--sec-pad-y-tight);
-}
-[data-density="medium"] {
-  --sec-pad-y-active: var(--sec-pad-y);
-}
-[data-density="high"] {
-  --sec-pad-y-active: var(--sec-pad-y-high);
+  --maxw: 1160px;
+  --narrow: 720px;
 }

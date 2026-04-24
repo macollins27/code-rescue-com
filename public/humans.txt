@@ -1,17 +1,12 @@
-/* TEAM */
-Operator: Maxwell Collins
-Contact: max [at] code-rescue.com
-Location: Tampa, FL
+/* CODE-RESCUE */
 
-/* THANKS */
-To everyone who filed a CRITICAL on a live system at 2am.
+Operator:   Maxwell Collins
+Contact:    max@code-rescue.com
+Location:   Tampa, FL, USA
+Site:       https://www.code-rescue.com
+Method:     Domain-Rules-Driven Development (maxwellacollins.com)
 
-/* SITE */
-Language: English
-Standards: HTML5, CSS3, ES2022
-Framework: Astro
-Hosting: Cloudflare Pages
-Fonts: JetBrains Mono, Newsreader, Inter — self-hosted
-Analytics: none
-Tracking: none
-Cookies: none
+Stack:      Astro · TypeScript · Hand-laid CSS · Self-hosted fonts · No tracking
+Hosting:    Cloudflare Pages
+
+Thanks:     Every engineer who's ever caught a bug a test missed.

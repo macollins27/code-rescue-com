@@ -1,9 +1,8 @@
 export * from "./types";
-export { CASES } from "./cases";
-export { CRISES } from "./crises";
-export { COMMITS } from "./commits";
-export { RULES } from "./rules";
-export { INVENTORY } from "./inventory";
-export { PASSES } from "./passes";
+export { CONTACT } from "./contact";
+export { INSTALLED } from "./installed";
+export { PIPELINE } from "./pipeline";
 export { DELIVERABLES } from "./deliverables";
+export { INCIDENTS } from "./incidents";
+export { COMPARE } from "./compare";
 export * from "./copy";

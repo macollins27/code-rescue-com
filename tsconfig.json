@@ -10,8 +10,6 @@
     "allowUnusedLabels": false,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact",
     "paths": {
       "@/*": ["./src/*"],
       "@content/*": ["./src/content/*"],

@@ -1,0 +1,79 @@
+---
+import { WHAT_IT_IS } from "@content/copy";
+import { INSTALLED } from "@content/installed";
+---
+
+<section class="section section-what" id="what">
+  <div class="wrap narrow">
+    <div class="kicker">{WHAT_IT_IS.kicker}</div>
+    <h2 class="h2">{WHAT_IT_IS.title}</h2>
+    <p class="sub">{WHAT_IT_IS.sub}</p>
+  </div>
+  <div class="wrap">
+    <div class="installed-grid">
+      {
+        INSTALLED.map((m) => (
+          <div class="installed-card">
+            <div class="installed-n">{m.n}</div>
+            <div class="installed-what">{m.what}</div>
+            <div class="installed-plain">{m.plain}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="wrap narrow closing">
+    <div class="prose">
+      <p>{WHAT_IT_IS.closingPara}</p>
+    </div>
+    <p class="small muted closing-muted">{WHAT_IT_IS.closingMuted}</p>
+  </div>
+</section>
+
+<style>
+  .installed-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .installed-card {
+    background: var(--bg-card);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .section-what .installed-card {
+    background: var(--bg-warm);
+  }
+  .installed-n {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+  .installed-what {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+  .installed-plain {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .closing {
+    margin-top: 56px;
+  }
+  .closing-muted {
+    margin-top: 12px;
+  }
+</style>

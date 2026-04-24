@@ -1,40 +1,32 @@
 ---
 import Base from "@layouts/Base.astro";
-import TopBar from "@components/TopBar.astro";
+import TopNav from "@components/TopNav.astro";
 import Hero from "@components/Hero.astro";
-import Posture from "@components/Posture.astro";
-import Offer from "@components/Offer.astro";
-import Outcome from "@components/Outcome.astro";
-import Crises from "@components/Crises.astro";
-import CaseStudies from "@components/CaseStudies.astro";
-import NinePass from "@components/NinePass.astro";
-import RulesExplorer from "@components/RulesExplorer.astro";
-import Compare from "@components/Compare.astro";
-import Inventory from "@components/Inventory.astro";
-import CommitLog from "@components/CommitLog.astro";
-import Unsolved from "@components/Unsolved.astro";
-import Cta from "@components/Cta.astro";
+import ProblemSection from "@components/ProblemSection.astro";
+import WhatItIs from "@components/WhatItIs.astro";
+import HowItWorks from "@components/HowItWorks.astro";
+import Deliverables from "@components/Deliverables.astro";
+import Proof from "@components/Proof.astro";
+import RuleAnatomy from "@components/RuleAnatomy.astro";
+import Pricing from "@components/Pricing.astro";
+import NotThis from "@components/NotThis.astro";
+import Engage from "@components/Engage.astro";
 import SiteFooter from "@components/SiteFooter.astro";
-import SystemInfo from "@components/craft/SystemInfo.tsx";
 ---
 
 <Base>
-  <TopBar />
+  <TopNav />
   <main>
     <Hero />
-    <Posture />
-    <Offer />
-    <Outcome />
-    <Crises />
-    <CaseStudies />
-    <NinePass />
-    <RulesExplorer />
-    <Compare />
-    <Inventory />
-    <CommitLog />
-    <Unsolved />
-    <Cta />
+    <ProblemSection />
+    <WhatItIs />
+    <HowItWorks />
+    <Deliverables />
+    <Proof />
+    <RuleAnatomy />
+    <Pricing />
+    <NotThis />
+    <Engage />
   </main>
-  <SystemInfo client:idle />
   <SiteFooter />
 </Base>

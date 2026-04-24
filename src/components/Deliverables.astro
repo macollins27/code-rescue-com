@@ -1,0 +1,114 @@
+---
+import { DELIVERABLES_SEC } from "@content/copy";
+import { DELIVERABLES } from "@content/deliverables";
+---
+
+<section class="section section-deliverables" id="deliverables">
+  <div class="wrap narrow">
+    <div class="kicker">{DELIVERABLES_SEC.kicker}</div>
+    <h2 class="h2">{DELIVERABLES_SEC.title}</h2>
+    <p class="sub">{DELIVERABLES_SEC.sub}</p>
+  </div>
+  <div class="wrap">
+    <div class="deliv-grid">
+      {
+        DELIVERABLES.map((d) => (
+          <article class="deliv-card">
+            <div class="deliv-letter">{d.letter}</div>
+            <h3 class="deliv-label">{d.label}</h3>
+            <p class="deliv-oneline">{d.oneline}</p>
+            <p class="deliv-plain">{d.plain}</p>
+            <div class="deliv-foot">
+              <div>
+                <span class="deliv-k">Duration</span>
+                <span class="deliv-v">{d.duration}</span>
+              </div>
+              <div>
+                <span class="deliv-k">Best for</span>
+                <span class="deliv-v">{d.bestFor}</span>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .deliv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .deliv-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition:
+      border-color 200ms ease,
+      transform 200ms ease;
+  }
+  .deliv-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .deliv-letter {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .deliv-label {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .deliv-oneline {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin: 0;
+    font-style: italic;
+  }
+  .deliv-plain {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-dim);
+    margin: 0;
+    flex: 1;
+  }
+  .deliv-foot {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .deliv-foot > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .deliv-k {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+  .deliv-v {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.45;
+  }
+</style>

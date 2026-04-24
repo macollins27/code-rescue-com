@@ -1,0 +1,21 @@
+---
+import { PROBLEM } from "@content/copy";
+
+function renderPara(raw: string): string {
+  return raw.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+}
+---
+
+<section class="section" id="problem">
+  <div class="wrap narrow">
+    <div class="kicker">{PROBLEM.kicker}</div>
+    <h2 class="h2">{PROBLEM.title}</h2>
+    <div class="prose">
+      {PROBLEM.paragraphs.map((p) => <p set:html={renderPara(p)} />)}
+    </div>
+    <div class="pullquote">
+      <blockquote>{PROBLEM.pullquote}</blockquote>
+      <cite>{PROBLEM.pullquoteCite}</cite>
+    </div>
+  </div>
+</section>

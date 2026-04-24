@@ -1,0 +1,147 @@
+---
+import { PRICING } from "@content/copy";
+import { COMPARE } from "@content/compare";
+---
+
+<section class="section" id="pricing">
+  <div class="wrap narrow">
+    <div class="kicker">{PRICING.kicker}</div>
+    <h2 class="h2">{PRICING.title}</h2>
+    <p class="sub">{PRICING.sub}</p>
+
+    <div class="price-range">
+      <div class="price-range-row">
+        <span class="price-range-label">{PRICING.floor.label}</span>
+        <span class="price-range-amount">{PRICING.floor.amount}</span>
+        <span class="price-range-note">{PRICING.floor.note}</span>
+      </div>
+      <div class="price-range-bar" aria-hidden="true">
+        <div class="price-range-bar-fill"></div>
+      </div>
+      <div class="price-range-row">
+        <span class="price-range-label">{PRICING.ceiling.label}</span>
+        <span class="price-range-amount">{PRICING.ceiling.amount}</span>
+        <span class="price-range-note">{PRICING.ceiling.note}</span>
+      </div>
+    </div>
+
+    <div class="alternatives">
+      <div class="kicker">{PRICING.alternativesKicker}</div>
+      <h3 class="h3">{PRICING.alternativesTitle}</h3>
+      <p class="small-sub">{PRICING.alternativesSub}</p>
+
+      <div class="compare-v2">
+        {
+          COMPARE.map((row) => (
+            <div class="compare-v2-row">
+              <div class="compare-v2-label">{row.label}</div>
+              <div class="compare-v2-cell">
+                <span class="compare-v2-k">What it produces</span>
+                <span class="compare-v2-v">{row.produces}</span>
+              </div>
+              <div class="compare-v2-cell">
+                <span class="compare-v2-k">What it leaves</span>
+                <span class="compare-v2-v">{row.gap}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .price-range {
+    margin-top: 40px;
+    border: 1px solid var(--line-2);
+    background: var(--bg-card);
+    padding: 36px 40px;
+  }
+  .price-range-row {
+    display: grid;
+    grid-template-columns: 120px 220px 1fr;
+    gap: 32px;
+    align-items: baseline;
+    padding: 8px 0;
+  }
+  .price-range-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+  .price-range-amount {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 40px);
+    letter-spacing: -0.02em;
+    color: var(--accent-deep);
+    line-height: 1;
+  }
+  .price-range-note {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .price-range-bar {
+    margin: 20px 0 20px 152px;
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .price-range-bar-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--accent-faint), var(--accent));
+  }
+
+  .alternatives {
+    margin-top: 80px;
+  }
+
+  .compare-v2 {
+    margin-top: 24px;
+    border: 1px solid var(--line-2);
+    background: var(--bg-card);
+  }
+  .compare-v2-row {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1.3fr;
+    gap: 32px;
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .compare-v2-row:last-child {
+    border-bottom: none;
+  }
+  .compare-v2-label {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .compare-v2-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .compare-v2-k {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+  .compare-v2-v {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+</style>

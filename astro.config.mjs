@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
@@ -14,17 +13,11 @@ export default defineConfig({
     prefetchAll: false,
     defaultStrategy: "hover",
   },
-  integrations: [preact({ compat: true }), sitemap()],
+  integrations: [sitemap()],
   vite: {
     build: {
       sourcemap: false,
       cssMinify: "lightningcss",
-    },
-    optimizeDeps: {
-      exclude: ["@astrojs/preact"],
-    },
-    ssr: {
-      noExternal: ["@astrojs/preact"],
     },
   },
 });

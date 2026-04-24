@@ -1,0 +1,126 @@
+---
+import { RULE_ANATOMY } from "@content/copy";
+---
+
+<section class="section section-rule" id="rule">
+  <div class="wrap narrow">
+    <div class="kicker">{RULE_ANATOMY.kicker}</div>
+    <h2 class="h2">{RULE_ANATOMY.title}</h2>
+    <p class="sub">{RULE_ANATOMY.sub}</p>
+
+    <div class="rule-card">
+      <div class="rule-head">
+        <span class="rule-id mono">{RULE_ANATOMY.id}</span>
+        <span class="rule-type">{RULE_ANATOMY.type}</span>
+        <span class="rule-locked mono">{RULE_ANATOMY.locked}</span>
+      </div>
+      <h3 class="rule-title">{RULE_ANATOMY.ruleTitle}</h3>
+      <div class="rule-anatomy">
+        {
+          RULE_ANATOMY.rows.map((r) => (
+            <div class="rule-row">
+              <span class="rule-k">{r.k}</span>
+              <span class="rule-v">
+                {r.parts.map((p) =>
+                  p.kind === "code" ? (
+                    <code>{p.value}</code>
+                  ) : (
+                    <Fragment set:html={p.value.replace(/\*([^*]+)\*/g, "<em>$1</em>")} />
+                  )
+                )}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="rule-foot">
+        {RULE_ANATOMY.footerText}
+        <a class="ilink" href={RULE_ANATOMY.footerLinkHref}>{RULE_ANATOMY.footerLinkText}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rule-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line-2);
+    margin-top: 48px;
+  }
+  .rule-head {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg);
+  }
+  .rule-id {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-faint);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .rule-type {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warn);
+  }
+  .rule-locked {
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-left: auto;
+  }
+  .rule-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 28px 28px 20px;
+  }
+  .rule-anatomy {
+    padding: 0 28px 8px;
+  }
+  .rule-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .rule-k {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    padding-top: 2px;
+  }
+  .rule-v {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .rule-v :global(code) {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--bg-warm);
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: var(--ink);
+  }
+  .rule-foot {
+    padding: 20px 28px;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+  }
+</style>
