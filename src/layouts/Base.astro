@@ -3,6 +3,7 @@ import "@styles/tokens.css";
 import "@styles/fonts.css";
 import "@styles/global.css";
 import { META } from "@content/copy";
+import StructuredData from "@components/StructuredData.astro";
 
 interface Props {
   title?: string;
@@ -15,6 +16,8 @@ const {
   description = META.description,
   canonical = Astro.url.href,
 } = Astro.props;
+
+const OG_IMAGE = new URL("/og.png", Astro.site ?? "https://code-rescue.com/").toString();
 ---
 
 <!doctype html>
@@ -35,12 +38,26 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Code-Rescue" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={OG_IMAGE} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Code-Rescue — install the stack that catches AI mistakes before they ship."
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={OG_IMAGE} />
+    <meta
+      name="twitter:image:alt"
+      content="Code-Rescue — install the stack that catches AI mistakes before they ship."
+    />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <StructuredData />
     <link
       rel="alternate"
       type="application/rss+xml"

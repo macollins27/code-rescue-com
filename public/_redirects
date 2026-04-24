@@ -1,0 +1,43 @@
+# 301 redirects for old code-rescue.com routes (Next.js site pre-rebuild).
+# Anchor redirects keep buyers on the new single-page site; content-level
+# redirects (about, blog) send to the published methodology site.
+#
+# Syntax: <source> <destination> <status>
+# Cloudflare Pages honors this format.
+
+# Old single-page routes → new anchors
+/services        /#deliverables    301
+/services/       /#deliverables    301
+/pricing         /#pricing         301
+/pricing/        /#pricing         301
+/contact         /#engage          301
+/contact/        /#engage          301
+
+# Old /services/* pages (8 service landing pages) → home
+/services/ai-voice-agents/           /  301
+/services/ai-voice-agents            /  301
+/services/ai-chatbots/               /  301
+/services/ai-chatbots                /  301
+/services/business-automation/       /  301
+/services/business-automation        /  301
+/services/ai-product-development/    /  301
+/services/ai-product-development     /  301
+/services/ai-governance/             /  301
+/services/ai-governance              /  301
+/services/technical-due-diligence/   /  301
+/services/technical-due-diligence    /  301
+/services/ai-readiness-audits/       /  301
+/services/ai-readiness-audits        /  301
+
+# Content — send to where it actually lives now
+/about           https://maxwellacollins.com/about    301
+/about/          https://maxwellacollins.com/about    301
+/blog            https://maxwellacollins.com/writing  301
+/blog/           https://maxwellacollins.com/writing  301
+/blog/*          https://maxwellacollins.com/writing  301
+
+# Legal placeholders (old site didn't expose these; if any backlinks exist)
+/privacy         /                 301
+/terms           /                 301
+
+# /book and /book/ intentionally NOT redirected — external booking setup owns them.

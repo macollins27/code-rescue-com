@@ -1,0 +1,175 @@
+---
+/* JSON-LD structured data — the way Google + AI search understand what
+   Code-Rescue is. Keep in sync with CONTACT + engagements.json. */
+
+// Keep in sync with src/content/contact.ts and public/.well-known/engagements.json.
+// Display format of phone is "+1 (813) 480-7797" but E.164 goes here.
+const SITE = "https://code-rescue.com";
+const PHONE = "+18134807797";
+const EMAIL = "max@code-rescue.com";
+const FOUNDER_NAME = "Maxwell Collins";
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE}/#organization`,
+  name: "Code-Rescue",
+  alternateName: "Code Rescue",
+  description:
+    "Installation of Domain-Rules-Driven Development — a mechanical stack of rules, gates, and reviews that catches AI-written mistakes before they reach production. One engagement, price fixed at kickoff, one client at a time.",
+  url: SITE,
+  logo: `${SITE}/favicon.svg`,
+  image: `${SITE}/og.png`,
+  founder: {
+    "@type": "Person",
+    "@id": `${SITE}/#founder`,
+    name: FOUNDER_NAME,
+    url: "https://maxwellacollins.com/about",
+    jobTitle: "Operator, Code-Rescue",
+    knowsAbout: [
+      "Domain-Rules-Driven Development",
+      "AI-augmented software engineering",
+      "Software quality assurance",
+      "TypeScript",
+      "Code review automation",
+    ],
+  },
+  sameAs: [
+    "https://maxwellacollins.com",
+    "https://github.com/macollins27",
+    "https://www.linkedin.com/in/maxwell-a-collins",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: PHONE,
+    email: EMAIL,
+    contactType: "sales",
+    areaServed: "US",
+    availableLanguage: ["English"],
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Tampa",
+    addressRegion: "FL",
+    addressCountry: "US",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
+};
+
+const website = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE}/#website`,
+  name: "Code-Rescue",
+  description:
+    "The commercial installation of Domain-Rules-Driven Development — the methodology published at maxwellacollins.com.",
+  url: SITE,
+  publisher: { "@id": `${SITE}/#organization` },
+  inLanguage: "en-US",
+};
+
+const professionalService = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE}/#service`,
+  name: "Code-Rescue",
+  description:
+    "One engagement, price fixed at kickoff. Install the mechanical stack that catches AI-written mistakes before they reach your main branch.",
+  url: SITE,
+  logo: `${SITE}/favicon.svg`,
+  image: `${SITE}/og.png`,
+  telephone: PHONE,
+  email: EMAIL,
+  priceRange: "$$$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Tampa",
+    addressRegion: "FL",
+    addressCountry: "US",
+  },
+  founder: { "@id": `${SITE}/#founder` },
+  parentOrganization: { "@id": `${SITE}/#organization` },
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
+  serviceType: [
+    "AI code-quality engineering",
+    "Domain-Rules-Driven Development installation",
+    "Adversarial code review",
+    "QA auditor installation",
+    "System migration under mechanical review",
+    "Technical due-diligence remediation",
+  ],
+  offers: {
+    "@type": "Offer",
+    name: "Code-Rescue engagement",
+    description:
+      "Full DRDD stack installed in your codebase plus one shipped deliverable (domain build, system migration, or QA run).",
+    priceCurrency: "USD",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      priceCurrency: "USD",
+      minPrice: 10000,
+      price: 10000,
+    },
+    availability: "https://schema.org/LimitedAvailability",
+    eligibleRegion: { "@type": "Country", name: "United States" },
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Deliverables",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Domain Build",
+          description: "One area of your product, rebuilt end-to-end under full mechanical review.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "System Migration",
+          description: "One cross-cutting change, executed spec-first without regressions.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "QA Run",
+          description: "An autonomous auditor walks your app and files every bug it finds.",
+        },
+      },
+    ],
+  },
+  sameAs: [
+    "https://maxwellacollins.com",
+    "https://github.com/macollins27",
+    "https://www.linkedin.com/in/maxwell-a-collins",
+  ],
+};
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [{ "@type": "ListItem", position: 1, name: "Code-Rescue", item: SITE }],
+};
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [organization, website, professionalService, breadcrumb],
+};
+
+// Pre-serialize — Astro's JSON helper would double-escape </script> tags in content.
+// Our content doesn't include any, so a straight stringify is safe here.
+const json = JSON.stringify(graph);
+---
+
+<script type="application/ld+json" set:html={json} is:inline />
