@@ -1,0 +1,13 @@
+# Copy to .dev.vars (gitignored) for local `wrangler pages dev`.
+# Production values: set via `pnpm wrangler pages secret put <name>`.
+
+# Google Calendar (OAuth2 refresh-token flow, no SDK — functions/lib/calendar.ts)
+GOOGLE_OAUTH_CLIENT_ID=
+GOOGLE_OAUTH_CLIENT_SECRET=
+GOOGLE_OAUTH_REFRESH_TOKEN=
+GOOGLE_CALENDAR_ID=max@code-rescue.com
+
+# Resend (transactional email)
+RESEND_API_KEY=
+NOTIFICATION_EMAIL=max@code-rescue.com
+FROM_EMAIL=max@code-rescue.com

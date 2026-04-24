@@ -1,0 +1,25 @@
+name = "code-rescue-com"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 binding. `database_id` must be filled in after running:
+#   pnpm wrangler d1 create code-rescue-bookings
+# That command prints a UUID — paste it below, then:
+#   pnpm wrangler d1 migrations apply code-rescue-bookings          # local
+#   pnpm wrangler d1 migrations apply code-rescue-bookings --remote # prod
+[[d1_databases]]
+binding = "DB"
+database_name = "code-rescue-bookings"
+database_id = ""
+migrations_dir = "migrations"
+
+# Secrets (GOOGLE_OAUTH_*, RESEND_API_KEY, NOTIFICATION_EMAIL, FROM_EMAIL)
+# are NOT committed here. Local dev: .dev.vars. Production:
+#   pnpm wrangler pages secret put GOOGLE_OAUTH_CLIENT_ID
+#   pnpm wrangler pages secret put GOOGLE_OAUTH_CLIENT_SECRET
+#   pnpm wrangler pages secret put GOOGLE_OAUTH_REFRESH_TOKEN
+#   pnpm wrangler pages secret put GOOGLE_CALENDAR_ID
+#   pnpm wrangler pages secret put RESEND_API_KEY
+#   pnpm wrangler pages secret put NOTIFICATION_EMAIL
+#   pnpm wrangler pages secret put FROM_EMAIL

@@ -50,6 +50,9 @@ export default [
         AbortSignal: "readonly",
         FormData: "readonly",
         Blob: "readonly",
+        crypto: "readonly",
+        ResponseInit: "readonly",
+        HeadersInit: "readonly",
       },
     },
     plugins: {
