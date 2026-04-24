@@ -58,4 +58,6 @@
 /privacy         /legal/privacy-policy    301
 /terms           /legal/terms-of-service  301
 
-# /book and /book/ intentionally NOT redirected — external booking setup owns them.
+# /book and /book/ — handled natively by this site (see src/pages/book.astro).
+# Trailing-slash → canonical handled by Astro config (trailingSlash: "never").
+/book/           /book                    301
