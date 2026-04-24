@@ -15,7 +15,7 @@ import type { PagesFunction } from "../lib/types";
 import { OPERATOR_TZ, buildDateOptions } from "../lib/time";
 import { credsFromEnv, getAccessToken, createCalendarEvent } from "../lib/calendar";
 import { insertBooking, updateBookingEventId } from "../lib/db";
-import { sendAdminNotificationEmail } from "../lib/email";
+import { sendAdminNotificationEmail, sendBookerConfirmationEmail } from "../lib/email";
 import { validateBookingRequest } from "../lib/validation";
 
 const JSON_HEADERS: HeadersInit = {
@@ -50,6 +50,9 @@ export const onRequestPost: PagesFunction = async (ctx) => {
   try {
     insertResult = await insertBooking(ctx.env.DB, {
       id: bookingId,
+      name: v.name,
+      email: v.email,
+      phone: v.phone,
       company: v.company,
       role: v.role,
       teamSize: v.size,
@@ -89,6 +92,8 @@ export const onRequestPost: PagesFunction = async (ctx) => {
       timezone: OPERATOR_TZ,
       operatorEmail: ctx.env.NOTIFICATION_EMAIL || "max@code-rescue.com",
       requestId: bookingId,
+      bookerEmail: v.email,
+      bookerName: v.name,
     });
     meetLink = ev.meetLink;
     htmlLink = ev.htmlLink;
@@ -103,10 +108,15 @@ export const onRequestPost: PagesFunction = async (ctx) => {
     console.error("createCalendarEvent failed:", err);
   }
 
-  // 3) Admin email via waitUntil — don't block the HTTP response.
+  // 3) Emails via waitUntil — don't block the HTTP response.
+  //    Admin notification always fires. Booker confirmation fires only when
+  //    the calendar event succeeded (so there's a Meet link to include).
   ctx.waitUntil(
     sendAdminNotificationEmail(ctx.env, {
       bookingId,
+      name: v.name,
+      email: v.email,
+      phone: v.phone,
       company: v.company,
       role: v.role,
       size: v.size,
@@ -123,6 +133,23 @@ export const onRequestPost: PagesFunction = async (ctx) => {
       console.error("sendAdminNotificationEmail failed:", err);
     })
   );
+
+  if (meetLink || htmlLink) {
+    ctx.waitUntil(
+      sendBookerConfirmationEmail(ctx.env, {
+        bookingId,
+        toEmail: v.email,
+        toName: v.name,
+        date: v.date,
+        time: v.time,
+        timezone: OPERATOR_TZ,
+        meetLink,
+        htmlLink,
+      }).catch((err: unknown) => {
+        console.error("sendBookerConfirmationEmail failed:", err);
+      })
+    );
+  }
 
   return json({ ok: true, bookingId, rescheduleUrl: htmlLink ?? undefined });
 };

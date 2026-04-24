@@ -14,6 +14,9 @@ export interface ValidatedBooking {
   date: string;
   time: string;
   timeMinutes: number;
+  name: string;
+  email: string;
+  phone: string;
   company: string;
   role: string;
   size: string;
@@ -26,6 +29,10 @@ export interface ValidatedBooking {
 export type ValidationResult =
   | { ok: true; value: ValidatedBooking }
   | { ok: false; fields: Record<string, string> };
+
+// Basic RFC-5322-ish check. Resend will bounce anything invalid; this is
+// just a cheap pre-filter so we don't waste API quota on obvious garbage.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * Validate + sanitize a raw JSON body. `allowedDates` is the set of
@@ -45,6 +52,9 @@ export function validateBookingRequest(
 
   const date = typeof body["date"] === "string" ? body["date"] : "";
   const time = typeof body["time"] === "string" ? body["time"] : "";
+  const name = trimString(body["name"]);
+  const email = trimString(body["email"]);
+  const phone = trimString(body["phone"]);
   const company = trimString(body["company"]);
   const role = trimString(body["role"]);
   const size = trimString(body["size"]);
@@ -73,6 +83,17 @@ export function validateBookingRequest(
     }
   }
 
+  if (name.length < 1 || name.length > 200) {
+    fields["name"] = "Your name is required (1–200 chars).";
+  }
+  if (email.length < 1 || email.length > 254) {
+    fields["email"] = "Email is required.";
+  } else if (!EMAIL_RE.test(email)) {
+    fields["email"] = "That doesn't look like a valid email.";
+  }
+  if (phone.length > 50) {
+    fields["phone"] = "Keep the phone field under 50 chars.";
+  }
   if (company.length < 1 || company.length > 200) {
     fields["company"] = "Company is required (1–200 chars).";
   }
@@ -105,6 +126,9 @@ export function validateBookingRequest(
       date,
       time,
       timeMinutes,
+      name: name.slice(0, 200),
+      email: email.slice(0, 254),
+      phone: phone.slice(0, 50),
       company: company.slice(0, 200),
       role: role.slice(0, 200),
       size,

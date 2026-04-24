@@ -144,6 +144,7 @@ export interface CreateEventInput {
   operatorEmail: string;
   requestId: string;
   bookerEmail?: string;
+  bookerName?: string;
 }
 
 /**
@@ -161,6 +162,8 @@ export async function createCalendarEvent(
   const endIso = wallClockToOffsetIso(input.date, endMinutes, input.timezone);
 
   const descLines: string[] = [];
+  if (input.bookerName) descLines.push(`Booker: ${input.bookerName}`);
+  if (input.bookerEmail) descLines.push(`Email: ${input.bookerEmail}`);
   descLines.push(`Company: ${input.company}`);
   descLines.push(`Role: ${input.role}`);
   if (input.size) descLines.push(`Team size: ${input.size}`);
@@ -171,8 +174,14 @@ export async function createCalendarEvent(
   descLines.push("What's broken:");
   descLines.push(input.broken);
 
-  const attendees: Array<{ email: string }> = [{ email: input.operatorEmail }];
-  if (input.bookerEmail) attendees.push({ email: input.bookerEmail });
+  const attendees: Array<{ email: string; displayName?: string }> = [
+    { email: input.operatorEmail },
+  ];
+  if (input.bookerEmail) {
+    const booker: { email: string; displayName?: string } = { email: input.bookerEmail };
+    if (input.bookerName) booker.displayName = input.bookerName;
+    attendees.push(booker);
+  }
 
   const body = {
     summary: `Code-Rescue fit call — ${input.company}`,

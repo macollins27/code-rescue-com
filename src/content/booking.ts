@@ -110,6 +110,9 @@ export interface AvailabilityResponse {
 export interface BookingRequest {
   readonly date: string;
   readonly time: string;
+  readonly name: string;
+  readonly email: string;
+  readonly phone: string;
   readonly company: string;
   readonly role: string;
   readonly size: string;
@@ -134,6 +137,9 @@ export type BookingResponse =
     };
 
 export interface FormState {
+  name: string;
+  email: string;
+  phone: string;
   company: string;
   role: string;
   size: string;
@@ -144,6 +150,9 @@ export interface FormState {
 }
 
 export const EMPTY_FORM: FormState = {
+  name: "",
+  email: "",
+  phone: "",
   company: "",
   role: "",
   size: "",

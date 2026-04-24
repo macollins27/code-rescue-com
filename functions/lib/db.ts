@@ -32,6 +32,9 @@ export async function getBookedSlotsInRange(
 
 export interface InsertBookingInput {
   id: string;
+  name: string;
+  email: string;
+  phone: string;
   company: string;
   role: string;
   teamSize: string;
@@ -59,12 +62,15 @@ export async function insertBooking(
     await db
       .prepare(
         "INSERT INTO bookings (" +
-          "id, company, role, team_size, stack, deliverable, broken, timeline, " +
+          "id, name, email, phone, company, role, team_size, stack, deliverable, broken, timeline, " +
           "booking_date, booking_time_minutes, timezone" +
-          ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+          ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
       )
       .bind(
         input.id,
+        input.name,
+        input.email,
+        input.phone,
         input.company,
         input.role,
         input.teamSize,

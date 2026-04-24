@@ -187,7 +187,13 @@ export default function BookingIsland() {
     setForm((f) => ({ ...f, [k]: v }));
 
   const canSubmit = Boolean(
-    date && time && form.company.trim() && form.role.trim() && form.broken.trim()
+    date &&
+    time &&
+    form.name.trim() &&
+    form.email.trim() &&
+    form.company.trim() &&
+    form.role.trim() &&
+    form.broken.trim()
   );
 
   async function onSubmit() {
@@ -199,6 +205,9 @@ export default function BookingIsland() {
       await submitBooking({
         date,
         time,
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
         company: form.company,
         role: form.role,
         size: form.size,
@@ -273,9 +282,38 @@ export default function BookingIsland() {
 
           <div class="form-grid">
             <Field
+              label="Your name"
+              required
+              value={form.name}
+              autocomplete="name"
+              onInput={(v) => setField("name", v)}
+              error={fieldErrors["name"]}
+            />
+            <Field
+              label="Email"
+              required
+              type="email"
+              value={form.email}
+              autocomplete="email"
+              placeholder="you@company.com"
+              onInput={(v) => setField("email", v)}
+              error={fieldErrors["email"]}
+            />
+            <Field
+              label="Phone (optional)"
+              type="tel"
+              fullRow
+              value={form.phone}
+              autocomplete="tel"
+              placeholder="+1 555 555 5555"
+              onInput={(v) => setField("phone", v)}
+              error={fieldErrors["phone"]}
+            />
+            <Field
               label="Company"
               required
               value={form.company}
+              autocomplete="organization"
               onInput={(v) => setField("company", v)}
               error={fieldErrors["company"]}
             />
@@ -363,12 +401,25 @@ interface FieldProps {
   onInput: (v: string) => void;
   placeholder?: string;
   required?: boolean;
+  fullRow?: boolean;
+  type?: "text" | "email" | "tel";
+  autocomplete?: string;
   error?: string | undefined;
 }
 
-function Field({ label, value, onInput, placeholder, required, error }: FieldProps) {
+function Field({
+  label,
+  value,
+  onInput,
+  placeholder,
+  required,
+  fullRow,
+  type,
+  autocomplete,
+  error,
+}: FieldProps) {
   return (
-    <label class="field">
+    <label class={`field${fullRow ? " full-row" : ""}`}>
       <span class="field-label">
         {label}
         {required ? (
@@ -380,10 +431,12 @@ function Field({ label, value, onInput, placeholder, required, error }: FieldPro
       </span>
       <input
         class="input"
-        type="text"
+        type={type ?? "text"}
         value={value}
         onInput={(e) => onInput((e.currentTarget as HTMLInputElement).value)}
         placeholder={placeholder ?? ""}
+        autocomplete={autocomplete ?? "off"}
+        inputmode={type === "email" ? "email" : type === "tel" ? "tel" : undefined}
       />
       {error ? <span class="field-error">{error}</span> : null}
     </label>
