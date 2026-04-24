@@ -80,4 +80,19 @@ import { TOPNAV } from "@content/copy";
     background: var(--accent);
     color: var(--accent-ink) !important;
   }
+  @media (max-width: 640px) {
+    .topnav-links {
+      gap: 14px;
+    }
+    .topnav-links a:not(.topnav-cta) {
+      display: none;
+    }
+    .topnav-cta {
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+    .brand {
+      font-size: 17px;
+    }
+  }
 </style>

@@ -76,4 +76,23 @@ import { INSTALLED } from "@content/installed";
   .closing-muted {
     margin-top: 12px;
   }
+  @media (max-width: 900px) {
+    .installed-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .installed-n {
+      font-size: 56px;
+    }
+  }
+  @media (max-width: 640px) {
+    .installed-grid {
+      grid-template-columns: 1fr;
+    }
+    .installed-card {
+      padding: 32px 24px;
+    }
+    .installed-n {
+      font-size: 48px;
+    }
+  }
 </style>

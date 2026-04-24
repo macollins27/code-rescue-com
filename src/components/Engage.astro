@@ -133,4 +133,25 @@ import { ENGAGE } from "@content/copy";
     font-size: 17px;
     color: var(--accent-ink);
   }
+  @media (max-width: 900px) {
+    .channels {
+      grid-template-columns: 1fr;
+    }
+    .engage-facts {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 20px;
+    }
+  }
+  @media (max-width: 640px) {
+    .channel {
+      padding: 20px 22px;
+    }
+    .channel-v {
+      font-size: 18px;
+    }
+    .engage-facts {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
 </style>

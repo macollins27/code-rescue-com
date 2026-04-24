@@ -38,3 +38,6 @@ yarn-error.log*
 
 # Cloudflare Pages local dev
 .wrangler/
+
+# Local test artifacts
+artifacts/

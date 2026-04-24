@@ -65,4 +65,18 @@ import { PIPELINE } from "@content/pipeline";
     line-height: 1.55;
     color: var(--ink-dim);
   }
+  @media (max-width: 900px) {
+    .pipeline {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+  @media (max-width: 640px) {
+    .pipeline {
+      grid-template-columns: 1fr;
+    }
+    .pipeline-step {
+      padding: 24px 22px;
+    }
+  }
 </style>

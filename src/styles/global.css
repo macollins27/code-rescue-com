@@ -26,6 +26,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 ::selection {
@@ -264,73 +267,15 @@ section[id] {
   font-family: var(--mono);
 }
 
-/* Responsive — 900px */
-@media (max-width: 900px) {
-  .installed-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .pipeline {
-    grid-template-columns: 1fr;
-  }
-  .deliv-grid {
-    grid-template-columns: 1fr;
-  }
-  .notthis-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .compare-v2-row {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 20px;
-  }
-  .price-range-row {
-    grid-template-columns: 100px 1fr;
-  }
-  .price-range-row .price-range-note {
-    grid-column: 2;
-  }
-  .price-range-bar {
-    margin-left: 0;
-  }
-  .channels {
-    grid-template-columns: 1fr;
-  }
-  .rule-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-  .footer-top {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .hero-meta,
-  .engage-facts {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
+/* Responsive — global selectors only.
+   Component-scoped class responsive rules live inside each component's
+   <style> block so specificity matches Astro's scoping attribute. */
 @media (max-width: 640px) {
   .wrap {
     padding: 0 20px;
   }
-  .hero {
-    padding: 64px 0 48px;
-  }
   .section {
     padding: 64px 0;
-  }
-  .topnav-links {
-    gap: 16px;
-  }
-  .topnav-links a:not(.topnav-cta) {
-    display: none;
-  }
-  .installed-grid {
-    grid-template-columns: 1fr;
-  }
-  .hero-ctas {
-    flex-direction: column;
   }
   .btn {
     width: 100%;

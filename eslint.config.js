@@ -6,7 +6,15 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 
 export default [
   {
-    ignores: ["dist/**", ".astro/**", "node_modules/**", "design/**", "pnpm-lock.yaml"],
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      "node_modules/**",
+      "design/**",
+      "scripts/**",
+      "artifacts/**",
+      "pnpm-lock.yaml",
+    ],
   },
   js.configs.recommended,
   {

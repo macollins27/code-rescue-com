@@ -158,4 +158,27 @@ import { FOOTER } from "@content/copy";
   .footer-bot .muted {
     color: rgba(245, 242, 236, 0.5);
   }
+  @media (max-width: 900px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .footer-cols {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+  }
+  @media (max-width: 640px) {
+    .site-footer {
+      padding: 56px 0 24px;
+    }
+    .footer-cols {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .footer-bot {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
 </style>
