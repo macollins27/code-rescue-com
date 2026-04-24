@@ -1,0 +1,30 @@
+---
+import Base from "./Base.astro";
+import "@styles/booking.css";
+import { BOOKING_COPY, BOOKING_META } from "@content/booking";
+---
+
+<Base title={BOOKING_META.title} description={BOOKING_META.description}>
+  <header class="book-topnav">
+    <div class="book-topnav-inner">
+      <a href="/" class="brand" aria-label="Code-Rescue home">
+        <span class="brand-mark">CR</span>
+        <span>Code-Rescue</span>
+      </a>
+      <a href="/" class="back-link">{BOOKING_COPY.backLinkLabel}</a>
+    </div>
+  </header>
+  <main>
+    <article class="paper">
+      <div class="marginalia" aria-hidden="true">
+        {BOOKING_COPY.marginalia.map((m) => <span>{m}</span>)}
+      </div>
+      <slot />
+    </article>
+    <noscript>
+      <div class="noscript-notice">
+        {BOOKING_COPY.noscriptMessage}
+      </div>
+    </noscript>
+  </main>
+</Base>

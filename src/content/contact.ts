@@ -1,7 +1,7 @@
 import type { Contact } from "./types";
 
 export const CONTACT: Contact = {
-  bookingUrl: "https://www.code-rescue.com/book/",
+  bookingUrl: "/book",
   phone: "+1 (813) 480-7797",
   phoneHref: "tel:+18134807797",
   email: "max@code-rescue.com",

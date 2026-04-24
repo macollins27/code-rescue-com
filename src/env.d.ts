@@ -6,6 +6,8 @@
 interface ImportMetaEnv {
   readonly PUBLIC_GIT_SHA?: string;
   readonly PUBLIC_BUILD_DATE?: string;
+  /** Base URL for booking backend (empty = same-origin /api/*). */
+  readonly PUBLIC_API_BASE?: string;
 }
 
 interface ImportMeta {
