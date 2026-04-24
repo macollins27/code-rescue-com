@@ -1,0 +1,89 @@
+---
+import LegalPage from "@layouts/LegalPage.astro";
+---
+
+<LegalPage
+  title="Privacy Policy — Code-Rescue"
+  description="Code-Rescue collects no personal data from site visitors. No analytics, no cookies, no tracking."
+  kicker="Privacy"
+  h1="Privacy Policy"
+  lastUpdated="April 24, 2026"
+>
+  <h2>Short version</h2>
+  <p>
+    This website collects nothing from you. No cookies. No analytics. No tracking pixels. No
+    third-party scripts. No fingerprinting. No server logs beyond what the CDN automatically retains
+    for abuse prevention.
+  </p>
+
+  <h2>What the site actually does</h2>
+  <ul>
+    <li>Serves static HTML, CSS, and a tiny amount of JavaScript from Cloudflare Pages.</li>
+    <li>
+      Loads three fonts (Newsreader, JetBrains Mono, Inter) <em>self-hosted from this domain</em> — no
+      Google Fonts request, no third-party font CDN.
+    </li>
+    <li>
+      Renders a live clock in the footer via a 15-line script that runs entirely in your browser and
+      transmits nothing.
+    </li>
+    <li>
+      Publishes a machine-readable engagement summary at
+      <a href="/.well-known/engagements.json">/.well-known/engagements.json</a> for agents.
+    </li>
+  </ul>
+
+  <h2>What the site does not do</h2>
+  <ul>
+    <li>Set any cookie of any kind.</li>
+    <li>Load Google Analytics, Plausible, PostHog, Mixpanel, Segment, or any analytics service.</li>
+    <li>Load Facebook Pixel, LinkedIn Insight Tag, Twitter/X, or any advertising pixel.</li>
+    <li>Use session replay, heat maps, or any behavioral-tracking tool.</li>
+    <li>Embed any third-party script, iframe, or beacon.</li>
+    <li>Collect your IP, user-agent, or referrer into any log we retain.</li>
+    <li>Fingerprint your browser, device, or network.</li>
+    <li>Sell, share, rent, or transmit any data about you to anyone.</li>
+  </ul>
+
+  <h2>When you email</h2>
+  <p>
+    If you email <a href="mailto:max@code-rescue.com">max@code-rescue.com</a>, that email lives in
+    an inbox operated by Maxwell Collins. It's read by him. It's replied to by him. It is not
+    shared, sold, or processed by any automated marketing system.
+  </p>
+
+  <h2>When you book a call</h2>
+  <p>
+    The booking flow at <a href="https://www.code-rescue.com/book/">code-rescue.com/book/</a> is operated
+    by a third-party scheduling tool. That tool has its own privacy policy. The only information captured
+    is the information you type into the form.
+  </p>
+
+  <h2>Cloudflare logs</h2>
+  <p>
+    Cloudflare — the CDN that serves this site — retains standard edge logs (request IP, timestamp,
+    URL, status code) for up to 7 days for abuse prevention. Those logs are not accessible to
+    Code-Rescue, are not correlated with any other data, and are purged automatically.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    There is no account to delete, no profile to update, no preferences to unset, because there is
+    no data to delete, update, or unset. If you're reading this page to make sure nobody is tracking
+    you: nobody here is. If you'd like to verify that independently, open devtools and watch the
+    Network tab while you browse the site. The only requests are to
+    <code>code-rescue.com</code>.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, the "Last updated" date at the top of this page changes. If a change
+    ever added tracking, analytics, or cookies, it would be called out at the top of the page under
+    a header explicitly labeled "What changed."
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions: <a href="mailto:max@code-rescue.com">max@code-rescue.com</a>.
+  </p>
+</LegalPage>

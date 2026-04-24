@@ -239,6 +239,11 @@ export const FOOTER = {
   contactPlain: "Tampa, FL",
   bottomLeft: "© 2026 Code-Rescue · Maxwell Collins · Published in public",
   bottomRight: "No analytics · No tracking · No cookies · View-source has a note",
+  legal: [
+    { label: "Privacy", href: "/legal/privacy-policy" },
+    { label: "Terms", href: "/legal/terms-of-service" },
+    { label: "Cookies", href: "/legal/cookie-policy" },
+  ],
 } as const;
 
 export const TOPNAV = {

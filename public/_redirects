@@ -1,9 +1,11 @@
 # 301 redirects for old code-rescue.com routes (Next.js site pre-rebuild).
 # Anchor redirects keep buyers on the new single-page site; content-level
-# redirects (about, blog) send to the published methodology site.
+# redirects (about, blog, topically-adjacent posts) send to the published
+# methodology site.
 #
 # Syntax: <source> <destination> <status>
-# Cloudflare Pages honors this format.
+# Cloudflare Pages honors this format. Order matters — specific rules
+# must appear before wildcards.
 
 # Old single-page routes → new anchors
 /services        /#deliverables    301
@@ -12,6 +14,10 @@
 /pricing/        /#pricing         301
 /contact         /#engage          301
 /contact/        /#engage          301
+/faq             /#engage          301
+/faq/            /#engage          301
+/card            /                 301
+/card/           /                 301
 
 # Old /services/* pages (8 service landing pages) → home
 /services/ai-voice-agents/           /  301
@@ -29,15 +35,27 @@
 /services/ai-readiness-audits/       /  301
 /services/ai-readiness-audits        /  301
 
-# Content — send to where it actually lives now
+# Topically-adjacent blog posts → the specific page that closes the same argument.
+# MUST come before the /blog/* wildcard below.
+/blog/ai-governance-why-45-percent-of-ai-code-has-vulnerabilities/  https://maxwellacollins.com/manifesto  301
+/blog/ai-governance-why-45-percent-of-ai-code-has-vulnerabilities   https://maxwellacollins.com/manifesto  301
+/blog/what-technical-due-diligence-looks-like/                      /#what                                  301
+/blog/what-technical-due-diligence-looks-like                       /#what                                  301
+/blog/why-73-percent-of-ai-projects-fail/                           https://maxwellacollins.com/crises      301
+/blog/why-73-percent-of-ai-projects-fail                            https://maxwellacollins.com/crises      301
+
+# Content — send to where it actually lives now.
+# The blog wildcard catches the 13 remaining off-topic posts (voice agents,
+# chatbots, automation case studies) — consolidates link equity onto the
+# engineering brand without faking topical match.
 /about           https://maxwellacollins.com/about    301
 /about/          https://maxwellacollins.com/about    301
 /blog            https://maxwellacollins.com/writing  301
 /blog/           https://maxwellacollins.com/writing  301
 /blog/*          https://maxwellacollins.com/writing  301
 
-# Legal placeholders (old site didn't expose these; if any backlinks exist)
-/privacy         /                 301
-/terms           /                 301
+# Legacy short paths from earlier redirect rules (kept for safety)
+/privacy         /legal/privacy-policy    301
+/terms           /legal/terms-of-service  301
 
 # /book and /book/ intentionally NOT redirected — external booking setup owns them.

@@ -41,6 +41,20 @@ import { FOOTER } from "@content/copy";
       <span class="muted">{FOOTER.bottomLeft}</span>
       <span class="muted">{FOOTER.bottomRight}</span>
     </div>
+    <div class="footer-legal">
+      {
+        FOOTER.legal.map((l, i) => (
+          <>
+            {i > 0 ? (
+              <span class="sep" aria-hidden="true">
+                ·
+              </span>
+            ) : null}
+            <a href={l.href}>{l.label}</a>
+          </>
+        ))
+      }
+    </div>
   </div>
 </footer>
 
@@ -157,6 +171,23 @@ import { FOOTER } from "@content/copy";
   }
   .footer-bot .muted {
     color: rgba(245, 242, 236, 0.5);
+  }
+  .footer-legal {
+    margin-top: 10px;
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: rgba(245, 242, 236, 0.35);
+  }
+  .footer-legal a {
+    color: rgba(245, 242, 236, 0.55);
+    transition: color 150ms ease;
+  }
+  .footer-legal a:hover {
+    color: rgba(245, 242, 236, 0.9);
+  }
+  .footer-legal .sep {
+    user-select: none;
   }
   @media (max-width: 900px) {
     .footer-top {
